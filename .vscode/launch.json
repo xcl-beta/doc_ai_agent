@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+          // Name shown in the debug drop-down
+          "name": "DocumentParsingAgent (module)",
+          "type": "python",
+          "request": "launch",
+                // Run the file as a module:  python -m document_ai_agents.document_parsing_agent
+          "module": "document_ai_agents.document_parsing_agent",
+
+    
+          // Use workspace root as CWD
+          "cwd": "${workspaceFolder}",
+    
+          // Disable "justMyCode" so you can step into 3rd-party libs if needed
+          "justMyCode": true,
+    
+          // Ensure Cursor/Python can import your package
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        }
+      ]
+}

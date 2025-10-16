@@ -1,0 +1,18 @@
+[
+  {
+    "page_content": "Company: XL Capital Ltd. Lead Analyst: Tana Higman Backup Analyst: Jim Auden Date: Aug. 4, 2008",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/XLCL_Rating Package_8.4.2008_P.pdf"
+    }
+  },
+  {
+    "page_content": "A table showing the insurance rating presentation.  It includes columns for Entity & Security, Action, Issue Rating, IDR, Out/(RW), Loc. In Range, Fund. Trend, Strat. Cat., Group Rating, Issue Rating, IDR, and Out/(RW).  The rows represent different entities within XL Capital Ltd.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Table",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/XLCL_Rating Package_8.4.2008_P.pdf"
+    }
+  }
+]

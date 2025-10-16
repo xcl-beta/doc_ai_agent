@@ -1,0 +1,74 @@
+[
+  {
+    "page_content": "Table V: Comparison of the performance of fine tuning different pre-trained F-RCNN and M-RCNN models on the SPD documents. The performance scores are MAP @ IOU [0.50:0.95] evaluated via a 5-fold cross-document-validation on 20 SPD documents.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Table",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  },
+  {
+    "page_content": "The results demonstrate the advantage of PubLayNet over general image datasets in domain adaptation for document layout analysis.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  },
+  {
+    "page_content": "to train deep learning models that can accurately recognize the layout of unseen journals. For documents in a distant domain, e.g., government documents and SPD documents, we demonstrated the value of using PubLayNet in a transfer learning setting.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  },
+  {
+    "page_content": "VI. CONCLUSION We automatically generated the PubLayNet dataset, which is the largest ever available document layout annotation dataset exploiting redundancy in PCMOA. This dataset allows state-of-the-art object detection algorithms to be trained delivering high performance layout recognition on biomedical articles. Furthermore, this dataset is shown to be helpful to pre-train object detection algorithms to identify tables and different document layout objects in health insurance documents. These results are encouraging since the developed dataset is potentially helpful for document layout annotation of other domains. PubLayNet is available from https://github.com/ibm-aur-nlp/PubLayNet.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  },
+  {
+    "page_content": "As future work, we plan to exploit PMCOA for the automatic generation of large datasets to solve other document analysis problems with deep learning models. For example, PubLayNet does not contain relationships between the layout elements, e.g., a paragraph and a section title. Such information is available in the XML representation and can be exploit to automatically create a dataset of the logical structure of documents.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  },
+  {
+    "page_content": "ACKNOWLEDGMENT We thank Manoj Gambhir for relevant feedback on this work and for his work in the development of the SPD data set.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  },
+  {
+    "page_content": "REFERENCES [1] P. W. J. Staar, M. Dolfi, C. Auer, and C. Bekas, \"Corpus conversion service: A machine learning platform to ingest documents at scale,\" in Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining, ser. KDD '18. New York, NY, USA: ACM, 2018, pp. 774-782. [Online]. Available: http://doi.acm.org/10.1145/3219819.3219834",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  },
+  {
+    "page_content": "[2] R. Cattoni, T. Coianiz, S. Messelodi, and C. M. Modena, \"Geometric layout analysis techniques for document image understanding: a review,\" ITC-irst Technical Report, vol. 9703, no. 09, 1998.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  },
+  {
+    "page_content": "[3] T. M. Breuel, \"Two geometric algorithms for layout analysis,\" in International workshop on document analysis systems. Springer, 2002, pp. 188-199.",
+    "metadata": {
+      "page_number": 0,
+      "element_type": "Text-block",
+      "document_path": "/home/lixc/Documents/dl/document_ai_agents/data/docs.pdf"
+    }
+  }
+]
