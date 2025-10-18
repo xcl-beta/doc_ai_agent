@@ -1,6 +1,6 @@
 # VECTOR ABS Users Manual
 
-*Converted from PDF on 2025-10-16 09:25:08*
+*Converted from PDF on 2025-10-18 12:19:12*
 *Total Pages: 19*
 
 ---
@@ -458,21 +458,21 @@ VECTOR ABS 1.0 Model Users Manual Page 9 of 19 © Copyright Fitch Ratings Ltd 20
 
 ## Page 10
 
-<!-- Page Metadata: Tables=2, Images=1, TextBlocks=36, Dimensions=595.00x842.00 -->
+<!-- Page Metadata: Tables=2, Images=1, TextBlocks=20, Dimensions=595.00x842.00 -->
 
 www.fitchratings.com
 
-made the workshe pecified number of
+made the worksheet is automatically reconfigured to take inputs for the specified number of
 
-products and bands
+products and bands.
 
-There are two choi
+There are two choices for correlation:
 
-a. Fitch Defi c asset correlation
+a. Fitch Defined Correlation: This will create a portfolio-specific asset correlation
 
-matrix bas t for each pair of
+matrix based on Fitch’s assumptions. The correlation coefficient for each pair of
 
-assets is ba correlation is also
+assets is based on their Country and Sector. In addition a global correlation is also
 
 imposed on all the assets. For assets that are either in the same region or in the same
 
@@ -494,27 +494,13 @@ base correlation.
 |  |  |  |  |  |  |  | Spain |  |  | 3% |  |
 |  |  |  |  |  |  |  | United Kingdom |  |  | 3% |  |
 
-Fitch Correlation Structure
+Figure 2: Fitch correlation structure used by VECTOR ABS.
 
-Global Correlation 2%
+b. User Defined Correlation: This option allows the user to define its own sectors and
 
-Sector Correlation Region Correlation
+regions and to assign individual correlation assumptions to them. A maximum of six
 
-Auto Leases (new) 3% Austria 3%
-
-Auto Leases (used) 3% Belgium 3%
-
-Auto Loans (new) 3% France 3%
-
-Auto Loans (used) 3% Germany 3%
-
-Consumer Loans (unsec) 4% Italy 3%
-
-b. Use tors and
-
-regi m of six
-
-sect allocate
+sector and six regions can be defined. By selecting this option the user can allocate
 
 each asset on the Main worksheet to one of the six user-defined regions and one of the
 
@@ -536,24 +522,6 @@ convenience.
 |  | S5 |  |  | 3% |  |  | R5 |  |  | 3% |  |
 |  | S6 |  |  | 3% |  |  | R6 |  |  | 3% |  |
 
-User Defined Correlation Structure
-
-Global Correlation 2%
-
-Sector Correlation Region Correlation
-
-### S1 3% R1 3%
-
-### S2 3% R2 3%
-
-### S3 3% R3 3%
-
-### S4 3% R4 3%
-
-### S5 3% R5 3%
-
-### S6 3% R6 3%
-
 Figure 3: User defined correlation structure.
 
 VECTOR ABS 1.0 Model Users Manual Page 10 of 19 © Copyright Fitch Ratings Ltd 2006
@@ -562,7 +530,7 @@ VECTOR ABS 1.0 Model Users Manual Page 10 of 19 © Copyright Fitch Ratings Ltd 2
 
 ## Page 11
 
-<!-- Page Metadata: Tables=1, Images=1, TextBlocks=34, Dimensions=595.00x842.00 -->
+<!-- Page Metadata: Tables=1, Images=1, TextBlocks=27, Dimensions=595.00x842.00 -->
 
 www.fitchratings.com
 
@@ -590,9 +558,9 @@ colour coded (light purple).
 
 B. Portfolio Setup
 
-The portfolio must be
+The portfolio must be input in four steps:
 
-a. Manually ente ble that describe the
+a. Manually enter the fields of the Transaction Summary table that describe the
 
 transaction. This table is reproduced below and the only elements which are strictly
 
@@ -609,20 +577,6 @@ whether these numbers match with the portfolio stratification information.
 | Total Notional | 243,820,000.00 |
 | Currency | EURO |
 | Notional Unit | Actuals |
-
-Transaction Summary
-
-Test Portfolio Transaction Name
-
-4/10/06 Evaluation Date
-
-60000 Number of Credits
-
-Total Notional 243,820,000.00
-
-Currency EURO
-
-Notional Unit Actuals
 
 Table 1: Transaction Summary table
 
@@ -646,7 +600,7 @@ VECTOR ABS 1.0 Model Users Manual Page 11 of 19 © Copyright Fitch Ratings Ltd 2
 
 ## Page 12
 
-<!-- Page Metadata: Tables=4, Images=1, TextBlocks=28, Dimensions=595.00x842.00 -->
+<!-- Page Metadata: Tables=4, Images=1, TextBlocks=23, Dimensions=595.00x842.00 -->
 
 www.fitchratings.com
 
@@ -666,20 +620,6 @@ used cars 30000 122,000,000.00 2.30% 30.00% 60Auto Leases (used) Italy
 other loans 20000 81,330,000.00 2.30% 30.00% 60Consumer Loans (unsec) Italy |  |  |  |  |  |  |  |
 | Totals 60000 243,820,000.00 |  |  |  |  |  |  |  |  |
 
-Maximum
-
-Remaining Probability of Recovery Number of Outstanding
-
-Term Sector Region Default Rate Product Id Product Name Credits Principal
-
-1new cars 10000 40,490,000.00 2.30% 30.00% 60Auto Leases (new) Italy
-
-2used cars 30000 122,000,000.00 2.30% 30.00% 60Auto Leases (used) Italy
-
-3other loans 20000 81,330,000.00 2.30% 30.00% 60Consumer Loans (unsec) Italy
-
-Totals 60000 243,820,000.00
-
 Table 2 : The Portfolio Summary table
 
 c. Manually enter the fields of the Notional Bands table that specify the minimum and
@@ -696,7 +636,7 @@ must be monotonically increasing. In general 10 bands should be more than adequa
 
 to describe the notional distribution. However there might be a few credits in the
 
-portfolio with large no be allocated for such credits.
+portfolio with large notional values. Separate bands can be allocated for such credits.
 
 <!-- Table 2: pos=(221.12,378.56,373.76,503.12) -->
 | Band Id | Band
@@ -721,12 +661,6 @@ Maximum |
 | --- |
 | Maximum |
 
-5 5,000.00 6,000.00
-
-6 6,000.00 7,000.00
-
-7 7,000.00 8,000.00
-
 Table 3 : The Notional Band Definitions table
 
 d. Manually enter the fields AVG Outstanding Balance and Number of Credits in the
@@ -741,13 +675,23 @@ must be an integer and the average outstanding principal must lie between the
 
 minimum and maximum band limits. If there are no credits in a band then the number
 
+of credits can either be left blank or populated with a zero. The first band table is
+
+reserved for the entire portfolio. This table is retained only for data validation and
+
+guards against input errors. While it is possible to calculate the values for the entire
+
+portfolio from the individual band tables, it is recommended that the user
+
+independently populates this table.
+
 VECTOR ABS 1.0 Model Users Manual Page 12 of 19 © Copyright Fitch Ratings Ltd 2006
 
 ---
 
 ## Page 13
 
-<!-- Page Metadata: Tables=6, Images=1, TextBlocks=32, Dimensions=595.00x842.00 -->
+<!-- Page Metadata: Tables=6, Images=1, TextBlocks=22, Dimensions=595.00x842.00 -->
 
 www.fitchratings.com
 
@@ -774,8 +718,6 @@ of Credits |
 | Outstanding |
 | Balance |
 
-### AVG
-
 <!-- Table 3: pos=(182.24,126.40,230.48,145.76) -->
 | Product |
 | --- |
@@ -795,24 +737,6 @@ of Credits |
 | Number |
 | --- |
 | of Credits |
-
-Product Band Band Number Outstanding
-
-Band Id Name Minimum Maximum Balance of Credits
-
-1 new cars 0.00 2,000.00 1,000.00 1340
-
-2 new cars 2,000.00 3,000.00 2,500.00 1500
-
-3 new cars 3,000.00 4,000.00 3,500.00 1660
-
-4 new cars 4,000.00 5,000.00 4,500.00 2400
-
-5 new cars 5,000.00 6,000.00 5,500.00 1680
-
-6 new cars 6,000.00 7,000.00 6,500.00 1100
-
-7 new cars 7,000.00 8,000.00 7,500.00 320
 
 Table 4 The product band table
 
@@ -860,7 +784,7 @@ VECTOR ABS 1.0 Model Users Manual Page 13 of 19 © Copyright Fitch Ratings Ltd 2
 
 ## Page 14
 
-<!-- Page Metadata: Tables=1, Images=3, TextBlocks=17, Dimensions=595.00x842.00 -->
+<!-- Page Metadata: Tables=1, Images=3, TextBlocks=15, Dimensions=595.00x842.00 -->
 
 www.fitchratings.com
 
@@ -899,11 +823,7 @@ default rate implied by the rating scenario and term.
 | BB |  |  | 5.50% |  |  | 27.03% |  |  | 4.01% |  |  |
 | BB- |  |  | 5.11% |  |  | 27.91% |  |  | 3.68% |  |  |
 
-Rating Default Rating Rating Recovery Rate Rating Loss Rate
-
-Rate
-
-### (RDR) (RRR) (RLR)
+B. Portfolio Default Distribution
 
 The portfolio default distribution is displayed in the “Default Distribution Graph” page and
 
@@ -963,7 +883,7 @@ VECTOR ABS 1.0 Model Users Manual Page 15 of 19 © Copyright Fitch Ratings Ltd 2
 
 ## Page 16
 
-<!-- Page Metadata: Tables=1, Images=1, TextBlocks=17, Dimensions=595.00x842.00 -->
+<!-- Page Metadata: Tables=1, Images=1, TextBlocks=19, Dimensions=595.00x842.00 -->
 
 www.fitchratings.com
 
@@ -998,13 +918,17 @@ rebmuN 20000
 
 new cars used cars other loans personal loans
 
+Product
+
+Figure 5: Portfolio distribution by product graph produced by VECTOR ABS.
+
 VECTOR ABS 1.0 Model Users Manual Page 16 of 19 © Copyright Fitch Ratings Ltd 2006
 
 ---
 
 ## Page 17
 
-<!-- Page Metadata: Tables=1, Images=3, TextBlocks=20, Dimensions=595.00x842.00 -->
+<!-- Page Metadata: Tables=1, Images=3, TextBlocks=17, Dimensions=595.00x842.00 -->
 
 www.fitchratings.com
 
@@ -1028,25 +952,19 @@ listed in tabular format and organised by Country and Asset Sector. The higher t
 | Consumer Loans (unsec) |  |  | 50.00% | 55.00% | 60.00% | 63.33% | 66.66% |
 |  | Other Leases |  | 50.00% | 55.00% | 60.00% | 63.33% | 66.66% |
 
-Sector AAA AA+ AA AA- A+
-
-Auto Leases (new) 60.00% 65.00% 70.00% 73.33% 76.66%
-
-Auto Leases (used) 60.00% 65.00% 70.00% 73.33% 76.66%
-
-Auto Loans (new) 60.00% 65.00% 70.00% 73.33% 76.66%
-
-Auto Loans (used) 60.00% 65.00% 70.00% 73.33% 76.66%
-
-Consumer Loans (unsec) 50.00% 55.00% 60.00% 63.33% 66.66%
-
-Other Leases 50.00% 55.00% 60.00% 63.33% 66.66%
-
 Table 5 : Recovery Rate Scaling table.
 
 B. Correlation Adjustments
 
 ### As part of Fitch’s criteria, adjustments are made to the correlation based on Region, Country
+
+and Industry. The actual correlation table is displayed in Figure 2.
+
+C. Simulation Horizon and Confidence Levels
+
+The simulation horizon is the maximum of the remaining terms of the assets in the portfolio.
+
+The maximum remaining term that is used should not be larger than the term for which the
 
 base case default probability has been set. The confidence levels are then calculated for that
 
@@ -1064,11 +982,21 @@ VECTOR ABS 1.0 Model Users Manual Page 17 of 19 © Copyright Fitch Ratings Ltd 2
 
 www.fitchratings.com
 
+Appendix I: VECTOR ABS Methodology
+
+The general framework of VECTOR ABS is common to nearly all credit risk portfolio
+
 models – a multi risk factor, Monte Carlo model which generates the distribution of the
+
+portfolio losses by simulating various scenarios. VECTOR ABS provides for a single global
+
+risk factor and a set of regional and sector risk factors. Each of these factors is represented by
+
+a latent random Gaussian variable and is assumed to be independent of the other factors. A
 
 random draw for each of these factors creates a scenario or “state of the world”.
 
-the
+In each scenario, for every asset in the portfolio we compute an asset value. The value of the
 
 ### asset variable depends partially on the global, regional and sector risk factors and partially
 
@@ -1120,8 +1048,6 @@ Product Sector #Credits Notional PD RR Region
 |  | New cars |  |  | Autos Loans (new) |  |  | 2 |  |  | 8,300 |  |  | 3.5% |  |  | 35% |  |  | Italy |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-New cars Autos Loans (new) 2 8,300 3.5% 35% Italy
-
 Cons. Loans Consumer Loans 1 7,000 3.8% 40% Italy
 
 Table 7 : Simulation results.
@@ -1132,15 +1058,11 @@ Simulation 1 Simulation 2 Simulation 3 Simulation 4 Simulation 5 Simulation 6
 |  | Loan 1 |  | 1 |  |  | 1 |  |  |  |  |  |  |  |  | 1 |  | 1 |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-Loan 1 1 1 1 1
-
 Loan 2 1 1 1
 
 <!-- Table 3: pos=(71.21,674.96,523.31,684.08) -->
 |  | Loan 3 |  |  |  |  |  |  |  | 1 |  |  |  |  |  | 1 |  | 1 |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-
-Loan 3 1 1 1
 
 Default Simulation 1 Simulation 2 Simulation 3 Simulation 4 Simulation 5 Simulation 6
 
@@ -1148,15 +1070,11 @@ Default Simulation 1 Simulation 2 Simulation 3 Simulation 4 Simulation 5 Simulat
 |  | Loan 1 |  | 5,000 |  |  | 5,000 |  |  | 0 |  |  | 0 |  |  | 5,000 |  | 5,000 |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-Loan 1 5,000 5,000 0 0 5,000 5,000
-
 Loan 2 0 0 3,300 3,300 0 3,300
 
 <!-- Table 5: pos=(71.21,721.04,523.31,730.16) -->
 |  | Loan 3 |  | 0 |  |  | 0 |  |  | 7,000 |  |  | 0 |  |  | 7,000 |  | 7,000 |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-
-Loan 3 0 0 7,000 0 7,000 7,000
 
 Default Rate 5,000 5,000 10,300 3,300 12,000 15,300
 
@@ -1166,7 +1084,7 @@ VECTOR ABS 1.0 Model Users Manual Page 18 of 19 © Copyright Fitch Ratings Ltd 2
 
 ## Page 19
 
-<!-- Page Metadata: Tables=1, Images=1, TextBlocks=19, Dimensions=595.00x842.00 -->
+<!-- Page Metadata: Tables=1, Images=1, TextBlocks=14, Dimensions=595.00x842.00 -->
 
 www.fitchratings.com
 
@@ -1187,16 +1105,6 @@ Default #
 |  | Simulation 3 |  |  | 10,300 |  |  | 1 |  |
 |  |  |  | 12,000 |  |  |  |  |  |
 |  | Simulation 6 |  |  | 15,300 |  |  | 1 |  |
-
-Simulation 4 3,300 1
-
-Simulations 1,2 5,000 2
-
-Simulation 3 10,300 1
-
-Simulation 5 12,000 1
-
-Simulation 6 15,300 1
 
 The absolute portfolio default amounts are expressed as a percentage of the initial portfolio
 

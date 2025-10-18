@@ -1,7 +1,7 @@
 {
   "pdf_name": "VECTOR ABS Users Manual.pdf",
   "total_pages": 19,
-  "conversion_date": "2025-10-16 09:25:08",
+  "conversion_date": "2025-10-18 12:19:13",
   "total_images": 1,
   "pages": [
     {
@@ -92,7 +92,7 @@
       "num_tables": 2,
       "num_images": 1,
       "num_charts": 0,
-      "num_text_blocks": 36
+      "num_text_blocks": 20
     },
     {
       "page_number": 11,
@@ -101,7 +101,7 @@
       "num_tables": 1,
       "num_images": 1,
       "num_charts": 0,
-      "num_text_blocks": 34
+      "num_text_blocks": 27
     },
     {
       "page_number": 12,
@@ -110,7 +110,7 @@
       "num_tables": 4,
       "num_images": 1,
       "num_charts": 0,
-      "num_text_blocks": 28
+      "num_text_blocks": 23
     },
     {
       "page_number": 13,
@@ -119,7 +119,7 @@
       "num_tables": 6,
       "num_images": 1,
       "num_charts": 0,
-      "num_text_blocks": 32
+      "num_text_blocks": 22
     },
     {
       "page_number": 14,
@@ -128,7 +128,7 @@
       "num_tables": 1,
       "num_images": 3,
       "num_charts": 0,
-      "num_text_blocks": 17
+      "num_text_blocks": 15
     },
     {
       "page_number": 15,
@@ -146,7 +146,7 @@
       "num_tables": 1,
       "num_images": 1,
       "num_charts": 0,
-      "num_text_blocks": 17
+      "num_text_blocks": 19
     },
     {
       "page_number": 17,
@@ -155,7 +155,7 @@
       "num_tables": 1,
       "num_images": 3,
       "num_charts": 0,
-      "num_text_blocks": 20
+      "num_text_blocks": 17
     },
     {
       "page_number": 18,
@@ -173,7 +173,7 @@
       "num_tables": 1,
       "num_images": 1,
       "num_charts": 0,
-      "num_text_blocks": 19
+      "num_text_blocks": 14
     }
   ]
 }

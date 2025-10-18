@@ -102,15 +102,14 @@ def extract_text_with_tables(pdf_path, temp_dir):
 
       # Extract text blocks (paragraphs) outside of tables
 
-      text_outside_tables = page.filter(
+      # Get all words first, then filter them based on table boundaries
+      all_words = page.extract_words()
 
-        lambda obj: not_within_bboxes(obj, table_bboxes, tolerance=5)
-
-      )
-
-      # Get all text with position information
-
-      words = text_outside_tables.extract_words()
+      # Filter words that are NOT within table bounding boxes
+ 
+      # NEW (word-level filtering )
+      # Filter words that are NOT within table bounding boxes
+      words = [word for word in all_words if not_within_bboxes(word, table_bboxes, tolerance=5)]
 
       if words:
 
@@ -490,6 +489,8 @@ def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path) -> Optional[Tuple
               any(word in text.lower() for word in ['chapter', 'section', 'part']))):
 
               markdown_lines.append(f"### {text}")
+
+              # need refinement for better header detection
 
             else:
 
