@@ -180,3 +180,12 @@ __pypackages__/
 /.ropeproject
 /.md  
 
+*.png 
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.pdf
+
+

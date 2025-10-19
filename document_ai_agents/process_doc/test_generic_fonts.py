@@ -31,7 +31,7 @@ def test_document_font_analysis(pdf_file, test_pages=None):
             avg_size = sum(stats['sizes']) / len(stats['sizes'])
             print(f"  {font}: {stats['count']} chars ({percentage:.1f}%), avg size: {avg_size:.1f}")
         
-        print(f"\nDetected Heading Hierarchy:")
+        print(f"\nDetected Heading Hierarchy:")  
         headings = font_analysis['hierarchy']['headings']
         if headings:
             for font_name, info in sorted(headings.items(), key=lambda x: x[1]['level']):

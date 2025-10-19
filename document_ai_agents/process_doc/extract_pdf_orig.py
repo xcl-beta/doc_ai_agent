@@ -3,6 +3,7 @@ import pdfplumber
 from pathlib import Path
 
 from typing import List, Dict, Optional, Tuple, Any
+from dataclasses import dataclass
 
 import time
 
@@ -10,11 +11,42 @@ import json
 
   
 
-def extract_text_with_tables(pdf_path, temp_dir):
+@dataclass
+class ChartDetectionConfig:
+  min_shapes: int = 12
+  min_area_ratio: float = 0.03
+  max_area_ratio: float = 0.6
+  score_threshold: float = 50.0
+
+  @staticmethod
+  def from_dict(d: Dict[str, Any]) -> "ChartDetectionConfig":
+    return ChartDetectionConfig(
+      min_shapes=int(d.get("min_shapes", 12)),
+      min_area_ratio=float(d.get("min_area_ratio", 0.03)),
+      max_area_ratio=float(d.get("max_area_ratio", 0.6)),
+      score_threshold=float(d.get("score_threshold", 50.0)),
+    )
+
+
+def _load_chart_config_if_present(preferred_paths: List[Path]) -> Optional[ChartDetectionConfig]:
+  for p in preferred_paths:
+    try:
+      if p and p.exists() and p.is_file():
+        with open(p, "r", encoding="utf-8") as f:
+          data = json.load(f)
+        cfg = ChartDetectionConfig.from_dict(data)
+        print(f"Loaded chart config from: {p}")
+        return cfg
+    except Exception as e:
+      print(f"Warning: failed to load chart config from {p}: {e}")
+  return None
+
+
+def extract_text_with_tables(pdf_path, temp_dir, chart_config: Optional[ChartDetectionConfig] = None):
 
   """
 
-  Extract text and tables from a PDF, preserving their original positions.
+  Extract text, tables, images, and charts from a PDF, preserving their original positions.
 
   Args:
 
@@ -31,7 +63,10 @@ def extract_text_with_tables(pdf_path, temp_dir):
   all_pages_content = []
 
   page_metadata = []
-  
+
+  # Prepare chart detection config
+  chart_cfg = chart_config or ChartDetectionConfig()
+
   # Analyze document-wide font characteristics for generic heading detection
   print("Analyzing document font hierarchy...")
   doc_font_analysis = analyze_document_fonts(pdf_path)
@@ -72,6 +107,11 @@ def extract_text_with_tables(pdf_path, temp_dir):
 
       page_meta['num_tables'] = len(tables)
 
+      # Detect chart regions (vector graphics clusters) and their bounding boxes
+      chart_regions = detect_charts_on_page(page, chart_cfg)
+      chart_bboxes = [c['bbox'] for c in chart_regions]
+      page_meta['num_charts'] = len(chart_regions) if chart_regions else 0
+
       # Extract tables as raw data
 
       extracted_tables = []
@@ -106,16 +146,28 @@ def extract_text_with_tables(pdf_path, temp_dir):
 
         })
 
+      # Add chart blocks (placeholders; images extracted later in markdown step)
+      for i, chart in enumerate(chart_regions):
+        cb = chart['bbox']
+        content_blocks.append({
+          'type': 'chart',
+          'y_position': cb[1],
+          'bbox': cb,
+          'x_position': cb[0],
+          'chart_index': i + 1,
+          'score': chart.get('score', 0)
+        })
+
       # Extract text blocks (paragraphs) outside of tables
 
-      # Get all words first, then filter them based on table boundaries
+      # Get all words first, then filter them based on table and chart boundaries
       all_words = page.extract_words()
 
-      # Filter words that are NOT within table bounding boxes
- 
+      # Filter words that are NOT within table or chart bounding boxes
+      combined_exclusion_bboxes = table_bboxes + chart_bboxes
+
       # NEW (word-level filtering )
-      # Filter words that are NOT within table bounding boxes
-      words = [word for word in all_words if not_within_bboxes(word, table_bboxes, tolerance=5)]
+      words = [word for word in all_words if not_within_bboxes(word, combined_exclusion_bboxes, tolerance=5)]
 
       if words:
 
@@ -139,36 +191,28 @@ def extract_text_with_tables(pdf_path, temp_dir):
             'heading_level': heading_level
           })
 
-      # Detect charts using vector shapes
-      chart_regions = detect_charts_simple(page, table_bboxes)
-      page_meta['num_charts'] = len(chart_regions)
-      
-      # Add chart blocks
-      for chart_idx, chart_region in enumerate(chart_regions):
-        content_blocks.append({
-          'type': 'chart',
-          'y_position': chart_region['bbox'][1],
-          'x_position': chart_region['bbox'][0],
-          'bbox': chart_region['bbox'],
-          'chart_index': chart_idx + 1,
-          'chart_data': chart_region,
-          'num_shapes': chart_region.get('num_shapes', 0),
-          'area_ratio': chart_region.get('area_ratio', 0.0),
-          'score': chart_region.get('score', 0.0)
-        })
-
       # Extract images
+
       images = page.images
+
       page_meta['num_images'] = len(images)
-      
+
       for img_index, img in enumerate(images):
+
         content_blocks.append({
+
           'type': 'image',
+
           'y_position': img['top'],
+
           'x_position': img['x0'],
+
           'bbox': [img['x0'], img['top'], img['x1'], img['bottom']],
+
           'image_index': img_index + 1,
+
           'image_data': img
+
         })
 
       # Sort all content blocks by vertical position (top to bottom)
@@ -246,206 +290,8 @@ def not_within_bboxes(obj, bboxes, tolerance=2):
 
   return True
 
-
-def load_chart_config(config_path=None):
-  """Load chart detection configuration from JSON file."""
-  if config_path is None:
-    config_path = Path(__file__).parent / "chart_config.json"
   
-  default_config = {
-    "min_shapes": 12,
-    "min_area_ratio": 0.03,
-    "max_area_ratio": 0.6,
-    "score_threshold": 50.0
-  }
   
-  try:
-    if Path(config_path).exists():
-      with open(config_path, 'r') as f:
-        config = json.load(f)
-        # Merge with defaults for any missing keys
-        for key, value in default_config.items():
-          if key not in config:
-            config[key] = value
-        return config
-    else:
-      return default_config
-  except Exception as e:
-    print(f"Warning: Could not load chart config from {config_path}: {e}")
-    return default_config
-
-
-def detect_charts_simple(page, table_bboxes=None, config=None):
-  """
-  Simple chart detection based on shape density in grid regions.
-  
-  Args:
-    page: pdfplumber page object
-    table_bboxes: List of table bounding boxes to exclude from chart detection
-    config: Chart detection configuration dict
-  
-  Returns:
-    List of chart regions with bounding boxes and metadata
-  """
-  if config is None:
-    config = load_chart_config()
-  
-  if table_bboxes is None:
-    table_bboxes = []
-  
-  # Extract all vector shapes (lines, curves, rectangles)
-  all_shapes = []
-  
-  # Get lines
-  for line in page.lines:
-    all_shapes.append({
-      'type': 'line',
-      'x0': line['x0'], 'y0': line['top'],
-      'x1': line['x1'], 'y1': line['bottom']
-    })
-  
-  # Get curves
-  for curve in page.curves:
-    all_shapes.append({
-      'type': 'curve',
-      'x0': curve['x0'], 'y0': curve['top'],
-      'x1': curve['x1'], 'y1': curve['bottom']
-    })
-  
-  # Get rectangles
-  for rect in page.rects:
-    all_shapes.append({
-      'type': 'rect',
-      'x0': rect['x0'], 'y0': rect['top'],
-      'x1': rect['x1'], 'y1': rect['bottom']
-    })
-  
-  if len(all_shapes) < config['min_shapes']:
-    return []
-  
-  # Divide page into grid and find regions with high shape density
-  page_width = page.width
-  page_height = page.height
-  grid_size = 50  # Grid cell size in points
-  
-  cols = int(page_width / grid_size) + 1
-  rows = int(page_height / grid_size) + 1
-  
-  # Create grid to count shapes in each cell
-  grid = [[[] for _ in range(cols)] for _ in range(rows)]
-  
-  # Assign shapes to grid cells
-  for shape in all_shapes:
-    center_x = (shape['x0'] + shape['x1']) / 2
-    center_y = (shape['y0'] + shape['y1']) / 2
-    
-    col = min(int(center_x / grid_size), cols - 1)
-    row = min(int(center_y / grid_size), rows - 1)
-    
-    if col >= 0 and row >= 0:
-      grid[row][col].append(shape)
-  
-  # Find regions with high shape density
-  chart_regions = []
-  visited = [[False for _ in range(cols)] for _ in range(rows)]
-  
-  for row in range(rows):
-    for col in range(cols):
-      if visited[row][col] or len(grid[row][col]) < 3:
-        continue
-      
-      # Find connected region of high-density cells
-      region_cells = []
-      stack = [(row, col)]
-      
-      while stack:
-        r, c = stack.pop()
-        if (r < 0 or r >= rows or c < 0 or c >= cols or 
-            visited[r][c] or len(grid[r][c]) < 2):
-          continue
-        
-        visited[r][c] = True
-        region_cells.append((r, c))
-        
-        # Add neighboring cells
-        for dr in [-1, 0, 1]:
-          for dc in [-1, 0, 1]:
-            if dr != 0 or dc != 0:
-              stack.append((r + dr, c + dc))
-      
-      # If region is large enough, consider it a potential chart
-      if len(region_cells) >= 4:
-        # Calculate bounding box for the region
-        min_row = min(r for r, c in region_cells)
-        max_row = max(r for r, c in region_cells)
-        min_col = min(c for r, c in region_cells)
-        max_col = max(c for r, c in region_cells)
-        
-        x0 = min_col * grid_size
-        y0 = min_row * grid_size
-        x1 = (max_col + 1) * grid_size
-        y1 = (max_row + 1) * grid_size
-        
-        # Count total shapes in region
-        total_shapes = sum(len(grid[r][c]) for r, c in region_cells)
-        
-        # Calculate area ratio
-        region_area = (x1 - x0) * (y1 - y0)
-        page_area = page_width * page_height
-        area_ratio = region_area / page_area
-        
-        # Apply filters
-        if (total_shapes >= config['min_shapes'] and
-            config['min_area_ratio'] <= area_ratio <= config['max_area_ratio']):
-          
-          # Calculate score
-          score = total_shapes * area_ratio * 100
-          
-          if score >= config['score_threshold']:
-            chart_regions.append({
-              'bbox': [x0, y0, x1, y1],
-              'num_shapes': total_shapes,
-              'area_ratio': area_ratio,
-              'score': score,
-              'grid_cells': len(region_cells)
-            })
-  
-  return chart_regions
-
-
-def bboxes_overlap(bbox1, bbox2, min_overlap_ratio=0.1):
-  """
-  Check if two bounding boxes overlap significantly.
-  
-  Args:
-    bbox1, bbox2: Bounding boxes in format [x0, y0, x1, y1]
-    min_overlap_ratio: Minimum overlap ratio to consider significant
-  
-  Returns:
-    True if bboxes overlap significantly
-  """
-  x0_1, y0_1, x1_1, y1_1 = bbox1
-  x0_2, y0_2, x1_2, y1_2 = bbox2
-  
-  # Calculate intersection
-  x_left = max(x0_1, x0_2)
-  y_top = max(y0_1, y0_2)
-  x_right = min(x1_1, x1_2)
-  y_bottom = min(y1_1, y1_2)
-  
-  if x_left < x_right and y_top < y_bottom:
-    intersection_area = (x_right - x_left) * (y_bottom - y_top)
-    area1 = (x1_1 - x0_1) * (y1_1 - y0_1)
-    area2 = (x1_2 - x0_2) * (y1_2 - y0_2)
-    
-    # Calculate overlap ratio as intersection / smaller area
-    smaller_area = min(area1, area2)
-    overlap_ratio = intersection_area / smaller_area if smaller_area > 0 else 0
-    
-    return overlap_ratio >= min_overlap_ratio
-  
-  return False
-
 
 def analyze_document_fonts(pdf_path, sample_pages=None):
   """
@@ -791,6 +637,138 @@ def group_words_into_blocks(words, vertical_gap_threshold=5):
   
   
 
+def _bbox_from_shape(shape: Dict[str, Any]) -> List[float]:
+  x0 = shape.get('x0', shape.get('x_min', 0))
+  x1 = shape.get('x1', shape.get('x_max', 0))
+  top = shape.get('top', shape.get('y0', 0))
+  bottom = shape.get('bottom', shape.get('y1', 0))
+  # Normalize in case values are swapped
+  x_left = min(x0, x1)
+  x_right = max(x0, x1)
+  y_top = min(top, bottom)
+  y_bottom = max(top, bottom)
+  return [x_left, y_top, x_right, y_bottom]
+
+
+def _bboxes_overlap(b1, b2, tolerance=2) -> bool:
+  return not (b1[2] < b2[0] - tolerance or b1[0] > b2[2] + tolerance or b1[3] < b2[1] - tolerance or b1[1] > b2[3] + tolerance)
+
+
+def _merge_bbox(b1, b2):
+  return [min(b1[0], b2[0]), min(b1[1], b2[1]), max(b1[2], b2[2]), max(b1[3], b2[3])]
+
+
+def _merge_overlapping_bboxes(bboxes: List[List[float]], tolerance=4) -> List[List[float]]:
+  if not bboxes:
+    return []
+  merged = []
+  for b in bboxes:
+    placed = False
+    for i in range(len(merged)):
+      if _bboxes_overlap(merged[i], b, tolerance=tolerance):
+        merged[i] = _merge_bbox(merged[i], b)
+        placed = True
+        break
+    if not placed:
+      merged.append(b)
+  # Iterate until stable
+  changed = True
+  while changed:
+    changed = False
+    result = []
+    for b in merged:
+      merged_flag = False
+      for i in range(len(result)):
+        if _bboxes_overlap(result[i], b, tolerance=tolerance):
+          result[i] = _merge_bbox(result[i], b)
+          merged_flag = True
+          changed = True
+          break
+      if not merged_flag:
+        result.append(b)
+    merged = result
+  return merged
+
+
+def detect_charts_on_page(page, chart_cfg: ChartDetectionConfig) -> List[Dict[str, Any]]:
+  """Heuristically detect chart regions by clustering vector graphics (lines/rects/curves).
+  Returns list of dicts with bbox and score.
+  """
+  page_width, page_height = page.width, page.height
+  # Unpack config
+  min_shapes = chart_cfg.min_shapes
+  min_area_ratio = chart_cfg.min_area_ratio
+  max_area_ratio = chart_cfg.max_area_ratio
+  score_threshold = chart_cfg.score_threshold
+  page_area = page_width * page_height
+
+  shapes = []
+  # Collect vector objects
+  for ln in getattr(page, 'lines', []) or []:
+    shapes.append(_bbox_from_shape(ln))
+  for rc in getattr(page, 'rects', []) or []:
+    shapes.append(_bbox_from_shape(rc))
+  for cv in getattr(page, 'curves', []) or []:
+    shapes.append(_bbox_from_shape(cv))
+
+  if not shapes:
+    return []
+
+  # Merge nearby/overlapping shapes to form candidate regions
+  merged_boxes = _merge_overlapping_bboxes(shapes, tolerance=6)
+
+  # Score regions
+  chart_regions = []
+  for mb in merged_boxes:
+    area = (mb[2] - mb[0]) * (mb[3] - mb[1])
+    if area <= 0:
+      continue
+    area_ratio = area / page_area
+    if area_ratio < min_area_ratio or area_ratio > max_area_ratio:
+      continue
+
+    # Count shapes whose centers fall within this region
+    count = 0
+    for s in shapes:
+      cx = (s[0] + s[2]) / 2
+      cy = (s[1] + s[3]) / 2
+      if (cx >= mb[0] and cx <= mb[2] and cy >= mb[1] and cy <= mb[3]):
+        count += 1
+
+    if count < min_shapes:
+      continue
+
+    # Compute word density inside region
+    words = page.extract_words()
+    words_in_region = [w for w in words if not_within_bboxes(w, [mb]) is False]
+    word_count = len(words_in_region)
+    shapes_density = count / (area_ratio + 1e-6)
+    word_density = word_count / (area_ratio + 1e-6)
+
+    # Heuristic: charts have high shapes density and relatively lower word density
+    score = shapes_density - (0.5 * word_density)
+    if score > score_threshold:  # threshold from config
+      chart_regions.append({'bbox': mb, 'score': score, 'shapes': count, 'words': word_count})
+
+  # Merge overlapping chart regions once more
+  final_bboxes = _merge_overlapping_bboxes([c['bbox'] for c in chart_regions], tolerance=6)
+  final_regions = []
+  for fb in final_bboxes:
+    # recompute basic score approx
+    area = (fb[2] - fb[0]) * (fb[3] - fb[1])
+    area_ratio = area / page_area
+    # approximate counts
+    count = sum(1 for s in shapes if ( (s[0]+s[2])/2 >= fb[0] and (s[0]+s[2])/2 <= fb[2] and (s[1]+s[3])/2 >= fb[1] and (s[1]+s[3])/2 <= fb[3]))
+    words = page.extract_words()
+    word_count = len([w for w in words if not_within_bboxes(w, [fb]) is False])
+    shapes_density = count / (area_ratio + 1e-6)
+    word_density = word_count / (area_ratio + 1e-6)
+    score = shapes_density - (0.5 * word_density)
+    final_regions.append({'bbox': fb, 'score': score, 'shapes': count, 'words': word_count})
+
+  return final_regions
+
+
 def _skip_watermark_images(img, page, min_area_ratio=0.01, max_area_ratio=0.9):
 
   """Skip very small or very large images that might be watermarks or backgrounds."""
@@ -865,7 +843,7 @@ def _convert_table_to_markdown(table_data) -> List[str]:
   
   
 
-def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path) -> Optional[Tuple[str, List[Dict], int, Dict]]:
+def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path, chart_config: Optional[ChartDetectionConfig] = None) -> Optional[Tuple[str, List[Dict], int, Dict]]:
 
   """
 
@@ -901,6 +879,15 @@ def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path) -> Optional[Tuple
 
     image_counter = 0
 
+    # Load chart config if not provided
+    if chart_config is None:
+      default_paths = [
+        temp_dir / "chart_config.json",
+        Path.cwd() / "chart_config.json",
+        input_path.parent / "chart_config.json",
+      ]
+      chart_config = _load_chart_config_if_present(default_paths) or ChartDetectionConfig()
+
     with pdfplumber.open(str(input_path)) as pdf:
 
       total_pages = len(pdf.pages)
@@ -909,7 +896,7 @@ def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path) -> Optional[Tuple
 
       # Extract content with preserved positions
 
-      pages_content, page_metadata = extract_text_with_tables(str(input_path), temp_dir)
+      pages_content, page_metadata = extract_text_with_tables(str(input_path), temp_dir, chart_config)
 
       # Document header
 
@@ -965,10 +952,37 @@ def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path) -> Optional[Tuple
               markdown_lines.append(f"{heading_prefix} {text}")
             else:
               markdown_lines.append(text)
+            
             markdown_lines.append("")
 
-          elif block['type'] == 'table':
+          elif block['type'] == 'chart':
+            # Render chart region to image
+            bbox = block['bbox']
+            try:
+              img_obj = page.within_bbox((bbox[0], bbox[1], bbox[2], bbox[3]))
+              pil_image = img_obj.to_image(resolution=150).original
+              image_counter += 1
+              img_filename = f"page_{page_num:03d}_chart_{block['chart_index']:02d}.png"
+              img_path = images_dir / img_filename
+              pil_image.save(img_path, 'PNG')
+              relative_path = f"images/{img_filename}"
+              markdown_lines.append(f"<!-- Chart {block['chart_index']}: pos=({bbox[0]:.2f},{bbox[1]:.2f},{bbox[2]:.2f},{bbox[3]:.2f}), score={block.get('score',0):.1f} -->")
+              markdown_lines.append(f"![Chart {block['chart_index']} from page {page_num}]({relative_path})")
+              markdown_lines.append("")
+              extracted_images.append({
+                'index': image_counter,
+                'image': pil_image,
+                'filename': img_filename,
+                'path': str(img_path),
+                'relative_path': relative_path,
+                'page_number': page_num,
+                'position': bbox,
+                'type': 'chart'
+              })
+            except Exception as e:
+              print(f"Error rendering chart region on page {page_num}: {e}")
 
+          elif block['type'] == 'table':
             # Add table with position metadata
 
             bbox = block['bbox']
@@ -983,82 +997,66 @@ def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path) -> Optional[Tuple
 
               markdown_lines.append("")
 
-          elif block['type'] == 'chart':
-            # Extract chart region as image
-            bbox = block['bbox']
-            
-            try:
-              # Create image from chart region
-              chart_obj = page.within_bbox(bbox)
-              pil_image = chart_obj.to_image(resolution=150).original
-              
-              image_counter += 1
-              img_filename = f"page_{page_num:03d}_chart_{block['chart_index']:02d}.png"
-              img_path = images_dir / img_filename
-              pil_image.save(img_path, 'PNG')
-              relative_path = f"images/{img_filename}"
-              
-              # Add chart with metadata
-              markdown_lines.append(f"<!-- Chart {block['chart_index']}: pos=({bbox[0]:.2f},{bbox[1]:.2f},{bbox[2]:.2f},{bbox[3]:.2f}) shapes={block['num_shapes']} score={block['score']:.1f} -->")
-              markdown_lines.append(f"![Chart {image_counter} from page {page_num}]({relative_path})")
-              markdown_lines.append("")
-              
-              # Store chart image with type marker
-              extracted_images.append({
-                'index': image_counter,
-                'image': pil_image,
-                'filename': img_filename,
-                'path': str(img_path),
-                'relative_path': relative_path,
-                'page_number': page_num,
-                'position': bbox,
-                'type': 'chart',  # Mark as chart
-                'num_shapes': block['num_shapes'],
-                'score': block['score']
-              })
-              
-              print(f"Extracted chart: page {page_num}, chart {block['chart_index']} -> {img_filename} (shapes: {block['num_shapes']}, score: {block['score']:.1f})")
-              
-            except Exception as e:
-              print(f"Error extracting chart {block['chart_index']} from page {page_num}: {e}")
-
           elif block['type'] == 'image':
+
             # Extract and save image
+
             img = block['image_data']
-            
+
             if _skip_watermark_images(img, page):
+
               continue
-            
+
             try:
+
               img_obj = page.within_bbox((img['x0'], img['top'], img['x1'], img['bottom']))
+
               pil_image = img_obj.to_image(resolution=150).original
-              
+
               image_counter += 1
+
               img_filename = f"page_{page_num:03d}_image_{block['image_index']:02d}.png"
+
               img_path = images_dir / img_filename
+
               pil_image.save(img_path, 'PNG')
+
               relative_path = f"images/{img_filename}"
-              
+
               # Add image with position metadata
+
               bbox = block['bbox']
+
               markdown_lines.append(f"<!-- Image {image_counter}: pos=({bbox[0]:.2f},{bbox[1]:.2f},{bbox[2]:.2f},{bbox[3]:.2f}) -->")
+
               markdown_lines.append(f"![Image {image_counter} from page {page_num}]({relative_path})")
+
               markdown_lines.append("")
-              
+
               # Store image for OCR
+
               extracted_images.append({
+
                 'index': image_counter,
+
                 'image': pil_image,
+
                 'filename': img_filename,
+
                 'path': str(img_path),
+
                 'relative_path': relative_path,
+
                 'page_number': page_num,
+
                 'position': bbox
+
               })
-              
+
               print(f"Extracted image: page {page_num}, image {block['image_index']} -> {img_filename}")
-              
+
             except Exception as e:
+
               print(f"Error extracting image {block['image_index']} from page {page_num}: {e}")
 
         markdown_lines.append("---")
@@ -1153,6 +1151,11 @@ if __name__ == "__main__":
       print(f" Page {page_meta['page_number']}: "
 
          f"{page_meta['num_tables']} tables, "
+
          f"{page_meta['num_images']} images, "
-         f"{page_meta['num_charts']} charts, "
+
          f"{page_meta['num_text_blocks']} text blocks")
+      
+
+
+      
