@@ -1,6 +1,6 @@
 # VECTOR ABS Users Manual
 
-*Converted from PDF on 2025-10-18 12:19:12*
+*Converted from PDF on 2025-10-18 13:36:28*
 *Total Pages: 19*
 
 ---
@@ -9,23 +9,23 @@
 
 <!-- Page Metadata: Tables=0, Images=1, TextBlocks=10, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-### FITCH DEFAULT VECTOR ABS
+#### FITCH DEFAULT VECTOR ABS
 
-### MODEL
+#### MODEL
 
-### USER MANUAL
+#### USER MANUAL
 
-Version: 1.0
+##### Version: 1.0
 
-11 October 2006
+##### 11 October 2006
 
-Authors:
+##### Authors:
 
-Vasileios Papatheodorou
+##### Vasileios Papatheodorou
 
-Balasubramanian Ramachandran
+##### Balasubramanian Ramachandran
 
 1 © Copyright Fitch Ratings Ltd 2006
 
@@ -35,7 +35,7 @@ Balasubramanian Ramachandran
 
 <!-- Page Metadata: Tables=0, Images=1, TextBlocks=30, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
 Table of Contents
 
@@ -43,53 +43,53 @@ Table of Contents
 
 • Installation Instructions..................................................................................................4
 
-A. System Requirements....................................................................................................4
+### A. System Requirements....................................................................................................4
 
-B. Installation Checklist ....................................................................................................4
+### B. Installation Checklist ....................................................................................................4
 
-C. Downloading the VECTOR ABS Model.......................................................................4
+### C. Downloading the VECTOR ABS Model.......................................................................4
 
-D. Installing the VECTOR ABS Model..............................................................................4
+### D. Installing the VECTOR ABS Model..............................................................................4
 
-E. Opening the VECTOR ABS Model................................................................................5
+### E. Opening the VECTOR ABS Model................................................................................5
 
-F. Uninstalling the VECTOR ABS Model..........................................................................5
+### F. Uninstalling the VECTOR ABS Model..........................................................................5
 
 • VECTOR ABS Definitions............................................................................................6
 
-A. Transaction Summary Input Terms................................................................................6
+### A. Transaction Summary Input Terms................................................................................6
 
-B. Portfolio Summary Input Terms.....................................................................................6
+### B. Portfolio Summary Input Terms.....................................................................................6
 
-C. Notional Bands Input Terms...........................................................................................7
+### C. Notional Bands Input Terms...........................................................................................7
 
-D. VECTOR ABS Output Terms........................................................................................7
+### D. VECTOR ABS Output Terms........................................................................................7
 
 • Deal Setup.....................................................................................................................9
 
-A. Initial Setup...................................................................................................................9
+### A. Initial Setup...................................................................................................................9
 
-B. Portfolio Setup.............................................................................................................11
+### B. Portfolio Setup.............................................................................................................11
 
-C. Simulation Run............................................................................................................13
+### C. Simulation Run............................................................................................................13
 
 • Analytical Results & Summary Reports.......................................................................14
 
-A. Simulation Summary....................................................................................................14
+### A. Simulation Summary....................................................................................................14
 
-B. Portfolio Default Distribution.......................................................................................14
+### B. Portfolio Default Distribution.......................................................................................14
 
-C. Portfolio Loss Distribution...........................................................................................15
+### C. Portfolio Loss Distribution...........................................................................................15
 
-D. Portfolio Composition..................................................................................................16
+### D. Portfolio Composition..................................................................................................16
 
 • VECTOR ABS Assumptions.......................................................................................17
 
-A. Recovery Rates............................................................................................................17
+### A. Recovery Rates............................................................................................................17
 
-B. Correlation Adjustments...............................................................................................17
+### B. Correlation Adjustments...............................................................................................17
 
-C. Simulation Horizon and Confidence Levels..................................................................17
+### C. Simulation Horizon and Confidence Levels..................................................................17
 
 • Appendix I: VECTOR ABS Methodology...................................................................18
 
@@ -101,9 +101,9 @@ VECTOR ABS 1.0 Model Users Manual Page 2 of 19 © Copyright Fitch Ratings Ltd 20
 
 <!-- Page Metadata: Tables=0, Images=3, TextBlocks=25, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-Overview
+### Overview
 
 The Fitch Default VECTOR ABS model (VECTOR ABS) is Fitch’s main quantitative tool to
 
@@ -157,29 +157,29 @@ VECTOR ABS 1.0 Model Users Manual Page 3 of 19 © Copyright Fitch Ratings Ltd 20
 
 <!-- Page Metadata: Tables=0, Images=3, TextBlocks=30, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-Installation Instructions
+### Installation Instructions
 
-A. System Requirements
+### A. System Requirements
 
-### PC
+#### PC
 
 (cid:132) 512+ MB Memory
 
 (cid:132) 1.2+ GHz Processor Speed
 
-(cid:132) Operating System
+#### (cid:132) Operating System
 
 (cid:132) Windows NT, 2000, or XP
 
-(cid:132) Software
+#### (cid:132) Software
 
 (cid:132) WinZip
 
 (cid:132) Excel 2003 (Older versions of Excel have not been tested)
 
-B. Installation Checklist
+### B. Installation Checklist
 
 Before installing and or downloading the VECTOR ABS Model you must:
 
@@ -187,29 +187,29 @@ Before installing and or downloading the VECTOR ABS Model you must:
 
 (cid:132) Meet the minimum requirements to access and install the model.
 
-C. Downloading the VECTOR ABS Model
+### C. Downloading the VECTOR ABS Model
 
 Before you can download and install the VECTOR ABS Model you must have access to the
 
 Internet. To download the VECTOR ABS Model:
 
-1. Open your Internet browser.
+### 1. Open your Internet browser.
 
-2. Type www.fitchratings.com in the address field. The Fitch Ratings website appears.
+### 2. Type www.fitchratings.com in the address field. The Fitch Ratings website appears.
 
-3. Click the Structured Finance menu. A drop-down menu appears. Click on the VECTOR
+### 3. Click the Structured Finance menu. A drop-down menu appears. Click on the VECTOR
 
 ABS item in the menu.
 
-D. Installing the VECTOR ABS Model
+### D. Installing the VECTOR ABS Model
 
 Once you have downloaded the VECTOR ABS Model file you must install the application.
 
 To install the VECTOR ABS Model:
 
-1. Double click on the downloaded file.
+### 1. Double click on the downloaded file.
 
-2. The installation script will install the model files in the directory “C:\Fitch\VECTOR
+### 2. The installation script will install the model files in the directory “C:\Fitch\VECTOR
 
 ABS” by default. The installation script will also install the VECTOR ABS icon on
 
@@ -223,27 +223,27 @@ VECTOR ABS 1.0 Model Users Manual Page 4 of 19 © Copyright Fitch Ratings Ltd 20
 
 <!-- Page Metadata: Tables=0, Images=1, TextBlocks=12, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-E. Opening the VECTOR ABS Model
+### E. Opening the VECTOR ABS Model
 
-1. Go to the Windows “Start” menu and select “Programs”
+### 1. Go to the Windows “Start” menu and select “Programs”
 
-2. VECTOR ABS should appear as one of the choices. Select the “VECTOR ABS”
-
-option.
-
-3. Alternatively, click on the VECTOR ABS icon on your computer’s screen.
-
-F. Uninstalling the VECTOR ABS Model
-
-1. Go to the Windows “Start” menu and select “Programs”
-
-2. VECTOR ABS should appear as one of the choices. Select the “VECTOR ABS”
+### 2. VECTOR ABS should appear as one of the choices. Select the “VECTOR ABS”
 
 option.
 
-3. Select the “Uninstall” option. This will uninstall the software.
+### 3. Alternatively, click on the VECTOR ABS icon on your computer’s screen.
+
+### F. Uninstalling the VECTOR ABS Model
+
+### 1. Go to the Windows “Start” menu and select “Programs”
+
+### 2. VECTOR ABS should appear as one of the choices. Select the “VECTOR ABS”
+
+option.
+
+### 3. Select the “Uninstall” option. This will uninstall the software.
 
 VECTOR ABS 1.0 Model Users Manual Page 5 of 19 © Copyright Fitch Ratings Ltd 2006
 
@@ -253,15 +253,15 @@ VECTOR ABS 1.0 Model Users Manual Page 5 of 19 © Copyright Fitch Ratings Ltd 20
 
 <!-- Page Metadata: Tables=0, Images=3, TextBlocks=30, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-VECTOR ABS Definitions
+### VECTOR ABS Definitions
 
-### This section provides brief definitions of many key terms used and seen in the VECTOR
+This section provides brief definitions of many key terms used and seen in the VECTOR
 
 ABS model.
 
-A. Transaction Summary Input Terms
+### A. Transaction Summary Input Terms
 
 Transaction Name – The name of the transaction.
 
@@ -281,7 +281,7 @@ Notional Unit – It is the unit of the notional amounts. The user can select th
 
 amounts either to be displayed as the actual amounts, thousands or millions.
 
-B. Portfolio Summary Input Terms
+### B. Portfolio Summary Input Terms
 
 Product – The portfolio is assumed to be segmented into products. Each product is assumed
 
@@ -307,7 +307,7 @@ Recovery Rate – The base case recovery assumption of the loans in a specific p
 
 assumed that all the loans in the same product have the same recovery rate.
 
-### Maximum Remaining Term – The maximum remaining term of the credits in a particular
+Maximum Remaining Term – The maximum remaining term of the credits in a particular
 
 product. It is specified in months and we assume that the remaining term lies between 1 and
 
@@ -319,7 +319,7 @@ VECTOR ABS 1.0 Model Users Manual Page 6 of 19 © Copyright Fitch Ratings Ltd 20
 
 <!-- Page Metadata: Tables=0, Images=1, TextBlocks=33, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
 120 months. The maximum remaining term that is used should not be larger than the term for
 
@@ -329,7 +329,7 @@ Sector – A sector is a risk bucket in the sense that credits within a sector, 
 
 likelihood of defaulting simultaneously. Each product is uniquely mapped to a sector. Fitch
 
-### provides a set of predefined sectors as part of its correlation structure. Fitch has defined the
+provides a set of predefined sectors as part of its correlation structure. Fitch has defined the
 
 following 6 sectors:
 
@@ -349,7 +349,7 @@ However the user can also define his or her own set of sectors and map the produ
 
 Region – It is the geographical region in which the specific product of the portfolio was
 
-### originated. In the Fitch correlation structure the regions are mapped to countries. As part of
+originated. In the Fitch correlation structure the regions are mapped to countries. As part of
 
 the correlation structure Fitch currently specifies 8 European countries. It is also possible for
 
@@ -357,7 +357,7 @@ the user specify a different set of regions. Regions are also considered to be r
 
 the same way as sectors.
 
-C. Notional Bands Input Terms
+### C. Notional Bands Input Terms
 
 Notional Bands tables describe the distribution of the assets of a portfolio in terms of their
 
@@ -373,9 +373,9 @@ Average (AVG) Outstanding Balance – The average outstanding principal of credi
 
 band.
 
-D. VECTOR ABS Output Terms
+### D. VECTOR ABS Output Terms
 
-### Rating Default Rate (RDR) – The RDR shows the expected default rate for a particular
+Rating Default Rate (RDR) – The RDR shows the expected default rate for a particular
 
 credit portfolio in the respective rating scenario on a post-simulation basis. The RDR is
 
@@ -391,15 +391,15 @@ VECTOR ABS 1.0 Model Users Manual Page 7 of 19 © Copyright Fitch Ratings Ltd 20
 
 <!-- Page Metadata: Tables=0, Images=1, TextBlocks=10, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
 Rating Recovery Rate (RRR) – The RRR shows the expected weighted average recovery
 
-### rate for all defaulted assets in a particular portfolio and rating scenario on a post-simulation
+rate for all defaulted assets in a particular portfolio and rating scenario on a post-simulation
 
 basis. It serves as an input into Fitch’s proprietary ABS cash flow model.
 
-### Rating Loss Rate (RLR) – The RLR shows the expected loss rate for a particular credit
+Rating Loss Rate (RLR) – The RLR shows the expected loss rate for a particular credit
 
 portfolio in the respective rating scenario on a post-simulation basis. The RLR takes into
 
@@ -417,11 +417,11 @@ VECTOR ABS 1.0 Model Users Manual Page 8 of 19 © Copyright Fitch Ratings Ltd 20
 
 <!-- Page Metadata: Tables=0, Images=4, TextBlocks=17, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-Deal Setup
+### Deal Setup
 
-A. Initial Setup
+### A. Initial Setup
 
 The VECTOR ABS Model is embedded in a Microsoft Excel spreadsheet, which provides the
 
@@ -433,16 +433,16 @@ below in Figure 1. The primary inputs which have to be decided upon before any a
 
 are:
 
-1. Correlation Structure (either “Fitch Defined Sectors” or “User Defined Sectors”).
+### 1. Correlation Structure (either “Fitch Defined Sectors” or “User Defined Sectors”).
 
-2. The number of products (1 to 16).
+### 2. The number of products (1 to 16).
 
-3. The number of notional bands (5 to 20).
+### 3. The number of notional bands (5 to 20).
 
 <!-- Image 1: pos=(72.08,321.44,522.80,664.64) -->
 ![Image 1 from page 9](images/page_009_image_04.png)
 
-Figure 1: The main input sheet
+#### Figure 1: The main input sheet
 
 It is important to decide upon the three inputs above before keying in any other input
 
@@ -460,7 +460,7 @@ VECTOR ABS 1.0 Model Users Manual Page 9 of 19 © Copyright Fitch Ratings Ltd 20
 
 <!-- Page Metadata: Tables=2, Images=1, TextBlocks=20, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
 made the worksheet is automatically reconfigured to take inputs for the specified number of
 
@@ -494,7 +494,7 @@ base correlation.
 |  |  |  |  |  |  |  | Spain |  |  | 3% |  |
 |  |  |  |  |  |  |  | United Kingdom |  |  | 3% |  |
 
-Figure 2: Fitch correlation structure used by VECTOR ABS.
+#### Figure 2: Fitch correlation structure used by VECTOR ABS.
 
 b. User Defined Correlation: This option allows the user to define its own sectors and
 
@@ -522,7 +522,7 @@ convenience.
 |  | S5 |  |  | 3% |  |  | R5 |  |  | 3% |  |
 |  | S6 |  |  | 3% |  |  | R6 |  |  | 3% |  |
 
-Figure 3: User defined correlation structure.
+#### Figure 3: User defined correlation structure.
 
 VECTOR ABS 1.0 Model Users Manual Page 10 of 19 © Copyright Fitch Ratings Ltd 2006
 
@@ -532,7 +532,7 @@ VECTOR ABS 1.0 Model Users Manual Page 10 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=1, Images=1, TextBlocks=27, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
 The number of products can vary between 1 and 16. Each product should consist of assets
 
@@ -556,7 +556,7 @@ defined the input tables are automatically configured. The input cells which req
 
 colour coded (light purple).
 
-B. Portfolio Setup
+### B. Portfolio Setup
 
 The portfolio must be input in four steps:
 
@@ -578,11 +578,11 @@ whether these numbers match with the portfolio stratification information.
 | Currency | EURO |
 | Notional Unit | Actuals |
 
-Table 1: Transaction Summary table
+#### Table 1: Transaction Summary table
 
 b. Manually enter the fields of the Portfolio Summary table that describe the portfolio in
 
-### product level. Please refer to the Definitions section for a description of the field. The
+product level. Please refer to the Definitions section for a description of the field. The
 
 table is displayed below with sample inputs. None of the columns should be left null.
 
@@ -602,7 +602,7 @@ VECTOR ABS 1.0 Model Users Manual Page 11 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=4, Images=1, TextBlocks=23, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
 <!-- Table 1: pos=(71.84,113.96,537.28,202.88) -->
 | Product Id | Product Name | Number of
@@ -620,7 +620,7 @@ used cars 30000 122,000,000.00 2.30% 30.00% 60Auto Leases (used) Italy
 other loans 20000 81,330,000.00 2.30% 30.00% 60Consumer Loans (unsec) Italy |  |  |  |  |  |  |  |
 | Totals 60000 243,820,000.00 |  |  |  |  |  |  |  |  |
 
-Table 2 : The Portfolio Summary table
+#### Table 2 : The Portfolio Summary table
 
 c. Manually enter the fields of the Notional Bands table that specify the minimum and
 
@@ -661,7 +661,7 @@ Maximum |
 | --- |
 | Maximum |
 
-Table 3 : The Notional Band Definitions table
+#### Table 3 : The Notional Band Definitions table
 
 d. Manually enter the fields AVG Outstanding Balance and Number of Credits in the
 
@@ -693,7 +693,7 @@ VECTOR ABS 1.0 Model Users Manual Page 12 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=6, Images=1, TextBlocks=22, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
 <!-- Table 1: pos=(130.16,113.36,464.48,235.04) -->
 | Band Id | Product
@@ -738,9 +738,9 @@ of Credits |
 | --- |
 | of Credits |
 
-Table 4 The product band table
+#### Table 4 The product band table
 
-C. Simulation Run
+### C. Simulation Run
 
 On the Main page the user is allowed to specify the number of scenarios used in the Monte-
 
@@ -786,11 +786,11 @@ VECTOR ABS 1.0 Model Users Manual Page 13 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=1, Images=3, TextBlocks=15, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-Analytical Results & Summary Reports
+### Analytical Results & Summary Reports
 
-A. Simulation Summary
+### A. Simulation Summary
 
 The Outputs page reproduces the details about the simulation in a table called the “Portfolio
 
@@ -823,11 +823,11 @@ default rate implied by the rating scenario and term.
 | BB |  |  | 5.50% |  |  | 27.03% |  |  | 4.01% |  |  |
 | BB- |  |  | 5.11% |  |  | 27.91% |  |  | 3.68% |  |  |
 
-B. Portfolio Default Distribution
+### B. Portfolio Default Distribution
 
 The portfolio default distribution is displayed in the “Default Distribution Graph” page and
 
-### shows the frequency of a particular portfolio default rate in a simulation. As the actual
+shows the frequency of a particular portfolio default rate in a simulation. As the actual
 
 distribution may be too large for some portfolios, the model separates the results into a
 
@@ -841,37 +841,37 @@ VECTOR ABS 1.0 Model Users Manual Page 14 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=0, Images=1, TextBlocks=19, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-Default Distribution (RDR)
+### Default Distribution (RDR)
 
-0.030%
+### 0.030%
 
-0.025%
+### 0.025%
 
-0.020% ytisneD
+### 0.020% ytisneD
 
-0.015%
+### 0.015%
 
-ytilibaborP
+### ytilibaborP
 
-0.010%
+### 0.010%
 
-0.005%
+### 0.005%
 
-0.000%
+### 0.000%
 
 %40.0 %47.0 %44.1 %41.2 %48.2 %45.3 %42.4 %49.4 %46.5 %43.6 %40.7 %47.7 %44.8 %41.9 %48.9 %45.01 %42.11 %49.11 %46.21 %43.31 %40.41 %47.41 %44.51
 
-Loss Amount (% of total)
+### Loss Amount (% of total)
 
-Figure 4: Default distribution graph produced by VECTOR ABS.
+#### Figure 4: Default distribution graph produced by VECTOR ABS.
 
-C. Portfolio Loss Distribution
+### C. Portfolio Loss Distribution
 
 The portfolio loss distribution is displayed in the “Los Distribution Graph page” and shows
 
-### the frequency of a particular portfolio loss rate in a simulation. The shape of graph is almost
+the frequency of a particular portfolio loss rate in a simulation. The shape of graph is almost
 
 identical to the Default distribution as it is only the loss amount that gets adjusted due to
 
@@ -885,15 +885,15 @@ VECTOR ABS 1.0 Model Users Manual Page 15 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=1, Images=1, TextBlocks=19, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-D. Portfolio Composition
+### D. Portfolio Composition
 
 The Portfolio Composition graphs show the portfolio composition by product, region and
 
 sector. A sample graph showing the product segmentation is displayed below.
 
-Portfolio Composition by Product
+### Portfolio Composition by Product
 
 45000
 
@@ -918,9 +918,9 @@ rebmuN 20000
 
 new cars used cars other loans personal loans
 
-Product
+### Product
 
-Figure 5: Portfolio distribution by product graph produced by VECTOR ABS.
+#### Figure 5: Portfolio distribution by product graph produced by VECTOR ABS.
 
 VECTOR ABS 1.0 Model Users Manual Page 16 of 19 © Copyright Fitch Ratings Ltd 2006
 
@@ -930,17 +930,17 @@ VECTOR ABS 1.0 Model Users Manual Page 16 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=1, Images=3, TextBlocks=17, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-VECTOR ABS Assumptions
+### VECTOR ABS Assumptions
 
-A. Recovery Rates
+### A. Recovery Rates
 
 This table contains Fitch’s Scaling levels applied to the base case recovery rate assumption,
 
 listed in tabular format and organised by Country and Asset Sector. The higher the rating
 
-### stress, the lower the scaling. We reproduce part of the table below.
+stress, the lower the scaling. We reproduce part of the table below.
 
 <!-- Table 1: pos=(71.65,255.44,536.67,369.09) -->
 | Sector |  |  | AAA | AA+ | AA | AA- | A+ |
@@ -952,15 +952,15 @@ listed in tabular format and organised by Country and Asset Sector. The higher t
 | Consumer Loans (unsec) |  |  | 50.00% | 55.00% | 60.00% | 63.33% | 66.66% |
 |  | Other Leases |  | 50.00% | 55.00% | 60.00% | 63.33% | 66.66% |
 
-Table 5 : Recovery Rate Scaling table.
+#### Table 5 : Recovery Rate Scaling table.
 
-B. Correlation Adjustments
+### B. Correlation Adjustments
 
-### As part of Fitch’s criteria, adjustments are made to the correlation based on Region, Country
+As part of Fitch’s criteria, adjustments are made to the correlation based on Region, Country
 
 and Industry. The actual correlation table is displayed in Figure 2.
 
-C. Simulation Horizon and Confidence Levels
+### C. Simulation Horizon and Confidence Levels
 
 The simulation horizon is the maximum of the remaining terms of the assets in the portfolio.
 
@@ -980,9 +980,9 @@ VECTOR ABS 1.0 Model Users Manual Page 17 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=5, Images=3, TextBlocks=40, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
-Appendix I: VECTOR ABS Methodology
+### Appendix I: VECTOR ABS Methodology
 
 The general framework of VECTOR ABS is common to nearly all credit risk portfolio
 
@@ -998,7 +998,7 @@ random draw for each of these factors creates a scenario or “state of the worl
 
 In each scenario, for every asset in the portfolio we compute an asset value. The value of the
 
-### asset variable depends partially on the global, regional and sector risk factors and partially
+asset variable depends partially on the global, regional and sector risk factors and partially
 
 upon its own idiosyncratic risk factor. To determine whether an asset defaults we compare its
 
@@ -1040,9 +1040,9 @@ comprises only three loans that are modelled in six independent simulation runs.
 
 model computes the total defaulted asset notional.
 
-Table 6: Portfolio inputs
+#### Table 6: Portfolio inputs
 
-Product Sector #Credits Notional PD RR Region
+### Product Sector #Credits Notional PD RR Region
 
 <!-- Table 1: pos=(71.21,603.68,504.08,612.80) -->
 |  | New cars |  |  | Autos Loans (new) |  |  | 2 |  |  | 8,300 |  |  | 3.5% |  |  | 35% |  |  | Italy |  |
@@ -1050,9 +1050,9 @@ Product Sector #Credits Notional PD RR Region
 
 Cons. Loans Consumer Loans 1 7,000 3.8% 40% Italy
 
-Table 7 : Simulation results.
+#### Table 7 : Simulation results.
 
-Simulation 1 Simulation 2 Simulation 3 Simulation 4 Simulation 5 Simulation 6
+### Simulation 1 Simulation 2 Simulation 3 Simulation 4 Simulation 5 Simulation 6
 
 <!-- Table 2: pos=(71.21,656.48,523.31,665.84) -->
 |  | Loan 1 |  | 1 |  |  | 1 |  |  |  |  |  |  |  |  | 1 |  | 1 |  |
@@ -1064,7 +1064,7 @@ Loan 2 1 1 1
 |  | Loan 3 |  |  |  |  |  |  |  | 1 |  |  |  |  |  | 1 |  | 1 |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-Default Simulation 1 Simulation 2 Simulation 3 Simulation 4 Simulation 5 Simulation 6
+### Default Simulation 1 Simulation 2 Simulation 3 Simulation 4 Simulation 5 Simulation 6
 
 <!-- Table 4: pos=(71.21,702.56,523.31,711.68) -->
 |  | Loan 1 |  | 5,000 |  |  | 5,000 |  |  | 0 |  |  | 0 |  |  | 5,000 |  | 5,000 |  |
@@ -1086,17 +1086,17 @@ VECTOR ABS 1.0 Model Users Manual Page 18 of 19 © Copyright Fitch Ratings Ltd 2
 
 <!-- Page Metadata: Tables=1, Images=1, TextBlocks=14, Dimensions=595.00x842.00 -->
 
-www.fitchratings.com
+#### www.fitchratings.com
 
 The results of all the simulation paths are then sorted according to the portfolio default
 
-### amount and the occurrence of each value is counted. In this particular example, path one and
+amount and the occurrence of each value is counted. In this particular example, path one and
 
 two yield the same results.
 
-Table 8: Default distribution.
+#### Table 8: Default distribution.
 
-Default #
+### Default #
 
 <!-- Table 1: pos=(156.56,162.56,428.48,208.40) -->
 |  | Simulation 4 |  |  | 3,300 |  |  | 1 |  |

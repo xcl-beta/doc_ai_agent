@@ -31,12 +31,6 @@ def extract_text_with_tables(pdf_path, temp_dir):
   all_pages_content = []
 
   page_metadata = []
-  
-  # Analyze document-wide font characteristics for generic heading detection
-  print("Analyzing document font hierarchy...")
-  doc_font_analysis = analyze_document_fonts(pdf_path)
-  print(f"Main font: {doc_font_analysis['main_font']} (size {doc_font_analysis['main_font_size']})")
-  print(f"Detected {len(doc_font_analysis['hierarchy']['headings'])} heading font types")
 
   with pdfplumber.open(pdf_path) as pdf:
 
@@ -126,7 +120,7 @@ def extract_text_with_tables(pdf_path, temp_dir):
         for block in text_blocks:
           # Analyze formatting for this text block
           formatting_info = analyze_text_formatting(page, block['bbox'])
-          is_heading, heading_level = is_likely_heading(block['text'], formatting_info, doc_font_analysis['hierarchy'])
+          is_heading, heading_level = is_likely_heading(block['text'], formatting_info)
           
           content_blocks.append({
             'type': 'text',
@@ -241,122 +235,6 @@ def not_within_bboxes(obj, bboxes, tolerance=2):
   
   
 
-def analyze_document_fonts(pdf_path, sample_pages=None):
-  """
-  Analyze font usage patterns across the entire document to identify typography hierarchy.
-  
-  Args:
-    pdf_path: Path to the PDF file
-    sample_pages: List of page indices to sample (None = analyze all pages)
-  
-  Returns:
-    Dict with document font characteristics and hierarchy
-  """
-  import pdfplumber
-  from collections import Counter, defaultdict
-  
-  with pdfplumber.open(pdf_path) as pdf:
-    # Sample pages for analysis (use all if not specified, or first 10 for large docs)
-    if sample_pages is None:
-      if len(pdf.pages) <= 10:
-        sample_pages = list(range(len(pdf.pages)))
-      else:
-        # Sample first, middle, and last pages for large documents
-        total = len(pdf.pages)
-        sample_pages = [0, 1, 2, total//4, total//2, 3*total//4, total-3, total-2, total-1]
-        sample_pages = [i for i in sample_pages if 0 <= i < total]
-    
-    # Collect font statistics
-    font_stats = defaultdict(lambda: {'count': 0, 'sizes': [], 'total_chars': 0})
-    all_sizes = Counter()
-    all_chars = 0
-    
-    for page_idx in sample_pages:
-      if page_idx >= len(pdf.pages):
-        continue
-        
-      page = pdf.pages[page_idx]
-      chars = page.chars
-      
-      for char in chars:
-        font_name = char.get('fontname', 'unknown')
-        font_size = char.get('size', 12.0)
-        
-        font_stats[font_name]['count'] += 1
-        font_stats[font_name]['sizes'].append(font_size)
-        font_stats[font_name]['total_chars'] += 1
-        all_sizes[font_size] += 1
-        all_chars += 1
-    
-    # Analyze patterns
-    # 1. Identify main body font (most frequent)
-    main_font = max(font_stats.keys(), key=lambda f: font_stats[f]['count'])
-    main_font_stats = font_stats[main_font]
-    main_font_size = Counter(main_font_stats['sizes']).most_common(1)[0][0]
-    
-    # 2. Identify potential heading fonts
-    heading_indicators = {}
-    
-    for font_name, stats in font_stats.items():
-      if stats['count'] < 10:  # Skip rarely used fonts
-        continue
-        
-      avg_size = sum(stats['sizes']) / len(stats['sizes'])
-      max_size = max(stats['sizes'])
-      usage_percentage = (stats['count'] / all_chars) * 100
-      
-      # Check if this could be a heading font
-      is_bold = 'bold' in font_name.lower()
-      is_larger = avg_size > main_font_size * 1.1  # 10% larger than main
-      is_much_larger = avg_size > main_font_size * 1.3  # 30% larger than main
-      is_different_family = not any(main_word in font_name.lower() for main_word in main_font.lower().split('-'))
-      
-      heading_score = 0
-      if is_bold: heading_score += 3
-      if is_much_larger: heading_score += 3
-      elif is_larger: heading_score += 2
-      if is_different_family and usage_percentage < 30: heading_score += 2
-      if usage_percentage < 5: heading_score += 1  # Less frequent = more likely heading
-      
-      heading_indicators[font_name] = {
-        'score': heading_score,
-        'avg_size': avg_size,
-        'max_size': max_size,
-        'usage_percent': usage_percentage,
-        'is_bold': is_bold,
-        'is_larger': is_larger,
-        'is_different_family': is_different_family
-      }
-    
-    # Create hierarchy levels
-    # Sort fonts by heading score and size
-    potential_headings = [(name, info) for name, info in heading_indicators.items() if info['score'] >= 2]
-    potential_headings.sort(key=lambda x: (-x[1]['score'], -x[1]['avg_size']))
-    
-    # Assign hierarchy levels
-    font_hierarchy = {
-      'main_body': {'font': main_font, 'size': main_font_size, 'level': 0},
-      'headings': {}
-    }
-    
-    for i, (font_name, info) in enumerate(potential_headings[:4]):  # Max 4 heading levels
-      level = i + 2  # Start from level 2 (## heading)
-      font_hierarchy['headings'][font_name] = {
-        'level': level,
-        'avg_size': info['avg_size'],
-        'score': info['score'],
-        'characteristics': info
-      }
-    
-    return {
-      'main_font': main_font,
-      'main_font_size': main_font_size,
-      'hierarchy': font_hierarchy,
-      'all_fonts': dict(font_stats),
-      'size_distribution': dict(all_sizes),
-      'total_chars_analyzed': all_chars
-    }
-
 def analyze_text_formatting(page, text_bbox):
   """
   Analyze the formatting characteristics of text within a bounding box.
@@ -407,7 +285,7 @@ def analyze_text_formatting(page, text_bbox):
     'has_larger_font': has_larger_font
   }
 
-def is_likely_heading(text, formatting_info, doc_font_hierarchy=None, page_chars=None):
+def is_likely_heading(text, formatting_info, page_chars=None):
   """
   Determine if text is likely a heading based on content and formatting.
   
@@ -428,32 +306,10 @@ def is_likely_heading(text, formatting_info, doc_font_hierarchy=None, page_chars
   if len(text) > 200:
     return False, 0
   
-  # Dynamic font-based detection (primary)
-  most_common_font = formatting_info.get('most_common_font', '')
-  avg_font_size = formatting_info.get('avg_font_size', 12.0)
-  
-  # Use document hierarchy if available, otherwise fall back to heuristics
-  if doc_font_hierarchy:
-    main_font = doc_font_hierarchy['main_body']['font']
-    main_font_size = doc_font_hierarchy['main_body']['size']
-    heading_fonts = doc_font_hierarchy['headings']
-    
-    # Check if this text uses a known heading font
-    font_level = 0
-    for font_name, font_info in heading_fonts.items():
-      if most_common_font == font_name:
-        font_level = font_info['level']
-        break
-    
-    # Additional checks for size-based headings
-    is_larger_font = avg_font_size > main_font_size * 1.15  # 15% larger
-    is_much_larger_font = avg_font_size > main_font_size * 1.4  # 40% larger
-  else:
-    # Fallback to heuristic detection
-    is_bold = 'bold' in most_common_font.lower()
-    is_italic = 'italic' in most_common_font.lower()
-    has_larger_font = avg_font_size > 12.5
-    font_level = 0
+  # Font-based detection (primary)
+  is_bold = formatting_info.get('is_bold', False)
+  is_helvetica = formatting_info.get('is_helvetica', False)
+  has_larger_font = formatting_info.get('has_larger_font', False)
   
   # Content-based patterns (secondary)
   # Pattern for numbered/lettered sections: "A. Something", "1. Something", "B)", etc.
@@ -470,22 +326,15 @@ def is_likely_heading(text, formatting_info, doc_font_hierarchy=None, page_chars
   heading_score = 0
   
   # Font-based scoring (most reliable)
-  if doc_font_hierarchy:
-    # Use document-specific font hierarchy
-    if font_level > 0:
-      heading_score += 4  # Strong indicator from document analysis
-    if is_much_larger_font:
-      heading_score += 2
-    elif is_larger_font:
-      heading_score += 1
-  else:
-    # Fallback heuristic scoring
-    if is_bold:
-      heading_score += 2
-    if is_italic:
-      heading_score += 1
-    if has_larger_font:
-      heading_score += 1
+  if is_helvetica and is_bold:
+    heading_score += 3  # Strong heading indicator
+  elif is_bold:
+    heading_score += 2  # Moderate heading indicator
+  elif is_helvetica:
+    heading_score += 1  # Weak heading indicator
+  
+  if has_larger_font:
+    heading_score += 1
   
   # Content-based scoring
   if is_numbered_section:
@@ -496,10 +345,7 @@ def is_likely_heading(text, formatting_info, doc_font_hierarchy=None, page_chars
     heading_score += 1
   
   # Determine heading level
-  if doc_font_hierarchy and font_level > 0:
-    # Use the level from document analysis
-    return True, font_level
-  elif heading_score >= 4:
+  if heading_score >= 4:
     return True, 2  # ## heading
   elif heading_score >= 2:
     return True, 3  # ### heading
@@ -749,16 +595,24 @@ def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path) -> Optional[Tuple
 
           if block['type'] == 'text':
 
-            # Use font-based heading detection
+            # Detect if text should be a header
+
             text = block['content']
-            is_heading = block.get('is_heading', False)
-            heading_level = block.get('heading_level', 0)
-            
-            if is_heading and heading_level > 0:
-              heading_prefix = '#' * heading_level
-              markdown_lines.append(f"{heading_prefix} {text}")
+
+            if (len(text) < 100 and
+
+              (text.isupper() or
+
+              any(word in text.lower() for word in ['chapter', 'section', 'part']))):
+
+              markdown_lines.append(f"### {text}")
+
+              # need refinement for better header detection
+
             else:
+
               markdown_lines.append(text)
+
             markdown_lines.append("")
 
           elif block['type'] == 'table':
