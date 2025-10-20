@@ -1,8 +1,8 @@
 {
   "pdf_name": "2008 Financial Turmoil Increases Variable Annuity Risk.pdf",
   "total_pages": 11,
-  "conversion_date": "2025-10-19 14:15:30",
-  "total_images": 12,
+  "conversion_date": "2025-10-20 08:59:28",
+  "total_images": 6,
   "pages": [
     {
       "page_number": 1,
@@ -10,7 +10,7 @@
       "height": 792,
       "num_tables": 4,
       "num_images": 0,
-      "num_charts": 1,
+      "num_charts": 0,
       "num_text_blocks": 42
     },
     {
@@ -20,7 +20,7 @@
       "num_tables": 3,
       "num_images": 0,
       "num_charts": 2,
-      "num_text_blocks": 16
+      "num_text_blocks": 44
     },
     {
       "page_number": 3,
@@ -28,8 +28,8 @@
       "height": 792,
       "num_tables": 9,
       "num_images": 0,
-      "num_charts": 1,
-      "num_text_blocks": 47
+      "num_charts": 0,
+      "num_text_blocks": 50
     },
     {
       "page_number": 4,
@@ -37,8 +37,8 @@
       "height": 792,
       "num_tables": 3,
       "num_images": 0,
-      "num_charts": 1,
-      "num_text_blocks": 48
+      "num_charts": 0,
+      "num_text_blocks": 49
     },
     {
       "page_number": 5,
@@ -46,8 +46,8 @@
       "height": 792,
       "num_tables": 3,
       "num_images": 0,
-      "num_charts": 2,
-      "num_text_blocks": 22
+      "num_charts": 0,
+      "num_text_blocks": 36
     },
     {
       "page_number": 6,
@@ -64,8 +64,8 @@
       "height": 792,
       "num_tables": 3,
       "num_images": 0,
-      "num_charts": 2,
-      "num_text_blocks": 34
+      "num_charts": 1,
+      "num_text_blocks": 52
     },
     {
       "page_number": 8,

@@ -1,6 +1,6 @@
 # 2008 Financial Turmoil Increases Variable Annuity Risk
 
-*Converted from PDF on 2025-10-19 14:15:30*
+*Converted from PDF on 2025-10-20 08:59:28*
 *Total Pages: 11*
 
 ---
@@ -11,7 +11,13 @@
 
 ### Insurance
 
+
+**[TABLE 1]**
+
 <!-- Table 1: pos=(0.00,82.26,612.00,99.18) -->
+
+**[TABLE 2]**
+
 <!-- Table 2: pos=(0.00,108.36,612.00,201.07) -->
 |  | Life/Annuity
 Insurers
@@ -20,8 +26,8 @@ Special Report | 2008 Financial Turmoil Increases |  |  |
 | --- | --- | --- | --- | --- |
 |  |  | Variable Annuity Risk |  |  |
 
-<!-- Chart 1: pos=(0.00,108.36,612.00,202.68), score=109.2 -->
-![Chart 1 from page 1](images/page_001_chart_01.png)
+
+**[TABLE 3]**
 
 <!-- Table 3: pos=(19.50,122.58,175.32,187.20) -->
 | Life/Annuity |
@@ -29,6 +35,9 @@ Special Report | 2008 Financial Turmoil Increases |  |  |
 | Insurers |
 | U.S. and Canada |
 | Special Report |
+
+
+**[TABLE 4]**
 
 <!-- Table 4: pos=(19.50,213.12,167.34,717.48) -->
 | Analysts |
@@ -147,9 +156,12 @@ sales in a rising market is an evil witch’s brew as insurers find themselves e
 
 ## Page 2
 
-<!-- Page Metadata: Tables=3, Images=0, TextBlocks=16, Dimensions=612.00x792.00 -->
+<!-- Page Metadata: Tables=3, Images=0, TextBlocks=44, Dimensions=612.00x792.00 -->
 
 ### Insurance
+
+
+**[TABLE 1]**
 
 <!-- Table 1: pos=(0.00,82.26,612.00,99.18) -->
 potentially significant losses. Obviously, several VA writers did not make it through the
@@ -180,23 +192,94 @@ point of reference, the last time the index value was at this level of 953 was o
 
 and the annual returns since 1930.
 
-<!-- Chart 2: pos=(179.76,312.12,579.24,504.60), score=305.7 -->
+##### S&P 500 Index
+
+(As of Dec. 30)
+
+1,800
+
+
+**[CHART 2]**
+
+<!-- Chart 2: pos=(215.16,363.36,565.50,468.18), score=593.9 -->
 ![Chart 2 from page 2](images/page_002_chart_02.png)
 
+1,600
+
+
+**[TABLE 2]**
+
 <!-- Table 2: pos=(256.46,374.70,533.03,420.12) -->
-<!-- Chart 1: pos=(179.76,531.12,585.72,714.48), score=638.1 -->
+1,400
+
+1,200
+
+1,000
+
+800
+
+600
+
+400
+
+200
+
+0
+
+1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
+
+### Source: Bloomberg.
+
+##### S&P 500 Annual Returns
+
+(%) 50
+
+
+**[CHART 1]**
+
+<!-- Chart 1: pos=(207.24,565.92,569.22,665.88), score=509.0 -->
 ![Chart 1 from page 2](images/page_002_chart_01.png)
 
+40
+
+
+**[TABLE 3]**
+
 <!-- Table 3: pos=(256.46,576.18,533.03,645.40) -->
+30
+
+20
+
+10
+
+0
+
+(10)
+
+(20)
+
+(30)
+
+(40)
+
+(50)
+
+1 3 1 47 65 07 1929 1953 1971 1989 1935 1959 1977 1995 194 198 200 19 19 20
+
+### Source: Bloomberg.
+
 ##### 2 2008 Financial Turmoil Increases Variable Annuity Risk October 22, 2008
 
 ---
 
 ## Page 3
 
-<!-- Page Metadata: Tables=9, Images=0, TextBlocks=47, Dimensions=612.00x792.00 -->
+<!-- Page Metadata: Tables=9, Images=0, TextBlocks=50, Dimensions=612.00x792.00 -->
 
 ### Insurance
+
+
+**[TABLE 1]**
 
 <!-- Table 1: pos=(0.00,82.08,612.00,99.06) -->
 According to the National Association for Variable Annuities (NAVA), the combined net
@@ -209,41 +292,47 @@ $796 billion.
 
 Likewise, VA sales have grown
 
-<!-- Chart 1: pos=(179.76,162.12,396.24,360.60), score=293.3 -->
-![Chart 1 from page 3](images/page_003_chart_01.png)
-
-significantly over the past few years
+### U.S. Variable Annuity Markets significantly over the past few years
 
 driven by the introduction of
 
-increasingly aggressive guaranteed
+Total Sales Net Asset Value increasingly aggressive guaranteed
 
-living benefit features. These sales
+($ Bil.) ($ Bil.) living benefit features. These sales
+
+200 2,000
+
+
+**[TABLE 2]**
 
 <!-- Table 2: pos=(208.50,213.60,364.44,327.96) -->
 patterns are very similar to the last
 
-market correction. The sales growth in
+175 1,750 market correction. The sales growth in
 
-2006 was 18% and 2007 was 16%, or a
+150 1,500 2006 was 18% and 2007 was 16%, or a
 
-combined period of 37%. The combined
+combined period of 37%. The combined 125 1,250
 
-sales growth in 1999 and 2000 was also
+sales growth in 1999 and 2000 was also 100 1,000
 
 37% (23% in 1999 and 12% in 2000).
 
-The VA market is concentrated to a
+75 750
 
-few names with the top 10 VA writers
+The VA market is concentrated to a 50 500
+
+few names with the top 10 VA writers 25 250
 
 holding 73% of the total industry net
 
-asset value (the top 25 represent
+0 0 asset value (the top 25 represent
+
+2003 2004 2005 2006 2007
 
 98%). The table below is ranked by
 
-sales to provide a glimpse of the
+### Source: NAVA. sales to provide a glimpse of the
 
 companies that were selling when the
 
@@ -261,11 +350,17 @@ Record VA sales were stock market reached its peak.
 
 ##### Insurer Sales (%) Sales at 12/31/07 (%) 2007 (2006)
 
+
+**[TABLE 3]**
+
 <!-- Table 3: pos=(179.28,462.48,584.22,471.27) -->
 | 1 (3) | AXA Financial | 15,502 | 9 | 12,895 | 88,265 | 6 |
 | --- | --- | --- | --- | --- | --- | --- |
 
 2 (2) MetLife 15,265 9 13,400 106,360 7
+
+
+**[TABLE 4]**
 
 <!-- Table 4: pos=(179.28,480.51,584.22,489.03) -->
 | 3 (1) | TIAA-CREF | 14,116 | 8 | 13,833 | 377,726 | 25 |
@@ -273,11 +368,17 @@ Record VA sales were stock market reached its peak.
 
 4 (4) Hartford Life 13,254 7 12,206 118,785 8
 
+
+**[TABLE 5]**
+
 <!-- Table 5: pos=(179.28,498.27,584.22,506.79) -->
 | 5 (5) | Lincoln National | 12,814 | 7 | 10,294 | 77,701 | 5 |
 | --- | --- | --- | --- | --- | --- | --- |
 
 6 (6) Prudential 11,528 6 10,223 78,491 5
+
+
+**[TABLE 6]**
 
 <!-- Table 6: pos=(179.28,516.03,584.22,524.55) -->
 | 7 (9) | John Hancock | 10,805 | 6 | 9,111 | 52,986 | 4 |
@@ -285,17 +386,26 @@ Record VA sales were stock market reached its peak.
 
 8 (11) ING 10,766 6 8,793 70,916 5
 
+
+**[TABLE 7]**
+
 <!-- Table 7: pos=(179.28,533.79,584.22,542.31) -->
 | 9 (8) | Ameriprise | 10,678 | 6 | 9,407 | 53,248 | 4 |
 | --- | --- | --- | --- | --- | --- | --- |
 
 10 (7) Pacific Life 10,676 6 9,497 53,802 4
 
+
+**[TABLE 8]**
+
 <!-- Table 8: pos=(179.28,551.55,584.22,560.07) -->
 |  | Subtotal | 125,403 | 70 | 109,659 | 1,078,280 | 73 |
 | --- | --- | --- | --- | --- | --- | --- |
 
 Various 28 353,940 24 49,195 41,156 − 11 25
+
+
+**[TABLE 9]**
 
 <!-- Table 9: pos=(179.28,569.79,584.22,578.28) -->
 |  | Subtotal | 174,598 | 98 | 150,815 | 1,432,220 | 97 |
@@ -327,9 +437,12 @@ risk profile of the products sold over the two periods is very different due to 
 
 ## Page 4
 
-<!-- Page Metadata: Tables=3, Images=0, TextBlocks=48, Dimensions=612.00x792.00 -->
+<!-- Page Metadata: Tables=3, Images=0, TextBlocks=49, Dimensions=612.00x792.00 -->
 
 ### Insurance
+
+
+**[TABLE 1]**
 
 <!-- Table 1: pos=(0.00,82.26,612.00,99.18) -->
 aggressive product guarantees introduced in recent years (see Appendix for description
@@ -384,8 +497,8 @@ this leads to a 55% increase in target capital to 2.8%. The target capital amoun
 
 (%)
 
-<!-- Chart 1: pos=(278.28,473.40,582.24,661.62), score=987.0 -->
-![Chart 1 from page 4](images/page_004_chart_01.png)
+
+**[TABLE 2]**
 
 <!-- Table 2: pos=(278.88,473.64,355.18,661.38) -->
 | Insurer A |  |  |
@@ -404,6 +517,9 @@ this leads to a 55% increase in target capital to 2.8%. The target capital amoun
 | 0.20 | 0.20 | 0.30 |
 | 16 |  |  |
 
+
+**[TABLE 3]**
+
 <!-- Table 3: pos=(431.82,473.64,508.08,661.38) -->
 | Insurer C |  |  |
 | --- | --- | --- |
@@ -421,39 +537,41 @@ this leads to a 55% increase in target capital to 2.8%. The target capital amoun
 | 0.30 | 0.40 | 1.50 |
 | 11 |  |  |
 
+##### Insurer B Composite
+
 ##### Product Guarantees
 
-Death Benefits
+Death Benefits 60 55
 
-Living Benefits
+Living Benefits 40 45
 
 ##### Asset Portfolio
 
-Fixed Income
+Fixed Income 35 30
 
-Equity
+Equity 65 70
 
-Fees (bp)
+Fees (bp) 205 227
 
-Average Policyholder Age
+Average Policyholder Age 57 62
 
-### In-the-Moneyness (GV/NAV)
+### In-the-Moneyness (GV/NAV) 100 105 110 102 107 112
 
 ##### Target Capital
 
 ##### (as a percent of NAV)
 
-AAA (CTE99.3)
+AAA (CTE99.3) 1.50 1.70 2.10 2.60 3.00 3.70
 
-AA (CTE98.5)
+AA (CTE98.5) 0.80 1.00 1.40 1.80 2.20 2.80
 
-A (CTE96.0)
+A (CTE96.0) 0.30 0.50 0.70 1.10 1.40 2.00
 
-BBB (CTE84.1)
+BBB (CTE84.1) 0.10 0.10 0.20 0.30 0.40 0.80
 
-BB (CTE68.2)
+BB (CTE68.2) 0.00 0.10 0.10 0.20 0.20 0.50
 
-Diversification Benefits
+Diversification Benefits 26 ⎯
 
 − − − BP Basis points. GV Policyholder guarantee values. NAV Net asset values.
 
@@ -467,9 +585,12 @@ becomes $39.5 billion or $14.1 billion higher than year end.
 
 ## Page 5
 
-<!-- Page Metadata: Tables=3, Images=0, TextBlocks=22, Dimensions=612.00x792.00 -->
+<!-- Page Metadata: Tables=3, Images=0, TextBlocks=36, Dimensions=612.00x792.00 -->
 
 ### Insurance
+
+
+**[TABLE 1]**
 
 <!-- Table 1: pos=(0.00,82.08,612.00,99.06) -->
 Although these target capital percentages seem modest, it is our opinion that many
@@ -486,10 +607,24 @@ more than 90% of the scenarios provide capital generation (i.e., earnings) while
 
 of the scenarios generate large losses and capital needs.
 
-<!-- Chart 1: pos=(198.12,207.12,597.84,364.02), score=939.0 -->
-![Chart 1 from page 5](images/page_005_chart_01.png)
+##### Present Value of Greatest Deficit (all Scenarios)
+
+Insurer A Insurer B Insurer C
+
+(%) 3
+
+
+**[TABLE 2]**
 
 <!-- Table 2: pos=(224.38,247.20,593.55,340.80) -->
+0
+
+(3)
+
+(6)
+
+### Source: Fitch Ratings.
+
 ##### Variable annuities’
 
 ##### asymmetrical earnings
@@ -498,12 +633,26 @@ profile comprises downside Magnifying the tail area provides a better appreciati
 
 ##### risk with limited upside
 
-<!-- Chart 2: pos=(198.12,402.30,597.84,558.60), score=194.0 -->
-![Chart 2 from page 5](images/page_005_chart_02.png)
-
 ##### participation.
 
+##### Present Value of Greatest Deficit (500 "Worst" Scenarios)
+
+Insurer A Insurer B Insurer C
+
+(%) 3
+
+
+**[TABLE 3]**
+
 <!-- Table 3: pos=(224.38,442.44,593.55,533.64) -->
+0
+
+(3)
+
+(6)
+
+Ratings. Source: Fitch
+
 As an illustration, we depict the equity return path for the worst scenario of “Insurer
 
 ### A.” One should see that these returns are not onerous but can be quite plausible.
@@ -530,7 +679,13 @@ capitalization. In comparison, ‘AA’ level is more commensurate to CTE98.
 
 ### Insurance
 
+
+**[TABLE 1]**
+
 <!-- Table 1: pos=(0.00,82.26,612.00,99.18) -->
+
+**[CHART 1]**
+
 <!-- Chart 1: pos=(179.76,108.12,579.48,286.62), score=248.0 -->
 ![Chart 1 from page 6](images/page_006_chart_01.png)
 
@@ -592,15 +747,46 @@ increased market volatility and deviation in policyholder behavior assumptions.
 
 ## Page 7
 
-<!-- Page Metadata: Tables=3, Images=0, TextBlocks=34, Dimensions=612.00x792.00 -->
+<!-- Page Metadata: Tables=3, Images=0, TextBlocks=52, Dimensions=612.00x792.00 -->
 
 ### Insurance
 
+
+**[TABLE 1]**
+
 <!-- Table 1: pos=(0.00,82.08,612.00,99.06) -->
-<!-- Chart 1: pos=(179.76,108.36,585.60,303.00), score=211.7 -->
-![Chart 1 from page 7](images/page_007_chart_01.png)
+##### VIX
+
+VIX Average
+
+80
+
+
+**[TABLE 2]**
 
 <!-- Table 2: pos=(219.00,145.20,579.10,233.52) -->
+70
+
+60
+
+50
+
+40
+
+30
+
+20
+
+10
+
+0
+
+3 5 /05 /08 /07 /08 /04 /06 /07 /04 /06 /0 /0
+
+3 3 3 3 3 3 3 3 3 3 3 1 1 /1 /1 4/1 4/1 4/1 4/1 10/1 10/1 10/1 4/ 10/ 10 10
+
+### Source: Bloomberg.
+
 ## Policyholder Behavior Could Cause Additional Issues
 
 A key assumption is guesstimating how policyholders will utilize or exercise these product
@@ -627,39 +813,53 @@ or surrenders (outflows to the industry).
 
 • Over the past eight years, total
 
-<!-- Chart 2: pos=(179.76,495.48,396.60,684.60), score=354.6 -->
-![Chart 2 from page 7](images/page_007_chart_02.png)
-
-sales as a percentage of net asset
+sales as a percentage of net asset U.S. Variable Annuity Market
 
 values has averaged 13% (a high
 
-of 14% and a low of 11%). A key
+Total Sales Net Sales of 14% and a low of 11%). A key
 
-component of total sales is 1035
+component of total sales is 1035 ($ Bil.)
 
-exchanges where a policyholder
+200 exchanges where a policyholder
+
+
+**[CHART 1]**
+
+<!-- Chart 1: pos=(206.22,543.30,387.90,652.68), score=487.8 -->
+![Chart 1 from page 7](images/page_007_chart_01.png)
+
+180
+
+
+**[TABLE 3]**
 
 <!-- Table 3: pos=(208.38,553.64,382.98,650.52) -->
 switches contracts to one with
 
-more features due to the current
+160
 
-contract performance.
+more features due to the current 140
 
-• Over the past five years, the ratio
+contract performance. 120
 
-of net sales and total sales has
+100 • Over the past five years, the ratio
 
-been 24% (18% in 2007). This ratio
+80 of net sales and total sales has
+
+60 been 24% (18% in 2007). This ratio
+
+40
 
 implies that for every dollar of
 
-“sales,” a quarter is “new money”
+20
 
-coming into the system. The other
+“sales,” a quarter is “new money” 0
 
-three-quarters is a possible
+coming into the system. The other 2003 2004 2005 2006 2007
+
+three-quarters is a possible Source: NAVA.
 
 detriment to existing carriers
 
@@ -678,6 +878,9 @@ net asset value or utilized product features such as the withdrawal benefit.
 <!-- Page Metadata: Tables=1, Images=0, TextBlocks=17, Dimensions=612.00x792.00 -->
 
 ### Insurance
+
+
+**[TABLE 1]**
 
 <!-- Table 1: pos=(0.00,82.26,612.00,99.18) -->
 Fitch considers this policyholder behavior to be the wild card in any analysis and the
@@ -710,6 +913,9 @@ policyholder age, contract age, surrender charges). When we alter this function,
 
 billion−$15 A” as the example), which could add $10 billion of additional capital needs.
 
+
+**[CHART 1]**
+
 <!-- Chart 1: pos=(179.76,333.12,579.48,528.66), score=285.3 -->
 ![Chart 1 from page 8](images/page_008_chart_01.png)
 
@@ -722,6 +928,9 @@ billion−$15 A” as the example), which could add $10 billion of additional ca
 <!-- Page Metadata: Tables=1, Images=0, TextBlocks=48, Dimensions=612.00x792.00 -->
 
 ### Insurance
+
+
+**[TABLE 1]**
 
 <!-- Table 1: pos=(0.00,82.08,612.00,99.06) -->
 ## Appendix
@@ -826,6 +1035,9 @@ using three basic approaches:
 
 ### Insurance
 
+
+**[TABLE 1]**
+
 <!-- Table 1: pos=(0.00,82.26,612.00,99.18) -->
 #### Product Design
 
@@ -927,6 +1139,9 @@ mortality or utilization risks (see more on policyholder behavior risk below).
 
 ### Insurance
 
+
+**[TABLE 1]**
+
 <!-- Table 1: pos=(0.00,82.08,612.00,99.06) -->
 • Volatility risks: Insurers can limit volatility exposure but cannot “lock in” a cost.
 
@@ -950,8 +1165,11 @@ with established hedging programs that have been operational for more than two y
 
 40%−70% tends to be in the range.
 
-<!-- Image 12: pos=(179.40,269.76,587.40,504.96) -->
-![Image 12 from page 11](images/page_011_image_01.png)
+
+**[IMAGE 6]**
+
+<!-- Image 6: pos=(179.40,269.76,587.40,504.96) -->
+![Image 6 from page 11](images/page_011_image_01.png)
 
 ## What are the “Greeks”?
 
@@ -982,6 +1200,9 @@ volatility of the underlying asset.
 ### Theta: A measure of the rate of change of an options value with respect to the
 
 passage of time.
+
+
+**[TABLE 2]**
 
 <!-- Table 2: pos=(181.36,610.08,581.76,735.48) -->
 | Copyright © 2008 by Fitch, Inc., Fitch Ratings Ltd. and its subsidiaries. One State Street Plaza, NY, NY 10004. |

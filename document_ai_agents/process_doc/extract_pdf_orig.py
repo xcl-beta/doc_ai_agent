@@ -99,18 +99,17 @@ def extract_text_with_tables(pdf_path, temp_dir, chart_config: Optional[ChartDet
 
       }
 
-      # Find all tables and their bounding boxes
-
+      # Step 1: Find all TABLES first
       tables = page.find_tables()
-
       table_bboxes = [table.bbox for table in tables]
-
       page_meta['num_tables'] = len(tables)
 
-      # Detect chart regions (vector graphics clusters) and their bounding boxes
-      chart_regions = detect_charts_on_page(page, chart_cfg)
+      # Step 2: Detect CHARTS, excluding table areas
+      chart_regions = detect_charts_on_page(page, chart_cfg, exclude_bboxes=table_bboxes)
       chart_bboxes = [c['bbox'] for c in chart_regions]
       page_meta['num_charts'] = len(chart_regions) if chart_regions else 0
+      
+      # Step 3: Process IMAGES separately (handled later in the flow)
 
       # Extract tables as raw data
 
@@ -191,28 +190,29 @@ def extract_text_with_tables(pdf_path, temp_dir, chart_config: Optional[ChartDet
             'heading_level': heading_level
           })
 
-      # Extract images
-
+      # Extract images (excluding those in table/chart areas)
       images = page.images
+      
+      # Filter out images that overlap with tables or charts
+      filtered_images = []
+      combined_exclusion = table_bboxes + chart_bboxes
+      
+      for img in images:
+        img_bbox = [img['x0'], img['top'], img['x1'], img['bottom']]
+        # Check if image is NOT within table or chart areas
+        if not_within_bboxes(img, combined_exclusion, tolerance=5):
+          filtered_images.append(img)
+      
+      page_meta['num_images'] = len(filtered_images)
 
-      page_meta['num_images'] = len(images)
-
-      for img_index, img in enumerate(images):
-
+      for img_index, img in enumerate(filtered_images):
         content_blocks.append({
-
           'type': 'image',
-
           'y_position': img['top'],
-
           'x_position': img['x0'],
-
           'bbox': [img['x0'], img['top'], img['x1'], img['bottom']],
-
           'image_index': img_index + 1,
-
           'image_data': img
-
         })
 
       # Sort all content blocks by vertical position (top to bottom)
@@ -690,8 +690,9 @@ def _merge_overlapping_bboxes(bboxes: List[List[float]], tolerance=4) -> List[Li
   return merged
 
 
-def detect_charts_on_page(page, chart_cfg: ChartDetectionConfig) -> List[Dict[str, Any]]:
+def detect_charts_on_page(page, chart_cfg: ChartDetectionConfig, exclude_bboxes=None) -> List[Dict[str, Any]]:
   """Heuristically detect chart regions by clustering vector graphics (lines/rects/curves).
+  Excludes areas that overlap with table bounding boxes.
   Returns list of dicts with bbox and score.
   """
   page_width, page_height = page.width, page.height
@@ -701,15 +702,25 @@ def detect_charts_on_page(page, chart_cfg: ChartDetectionConfig) -> List[Dict[st
   max_area_ratio = chart_cfg.max_area_ratio
   score_threshold = chart_cfg.score_threshold
   page_area = page_width * page_height
+  
+  if exclude_bboxes is None:
+    exclude_bboxes = []
 
   shapes = []
-  # Collect vector objects
+  # Collect vector objects that are NOT in excluded areas
   for ln in getattr(page, 'lines', []) or []:
-    shapes.append(_bbox_from_shape(ln))
+    ln_bbox = _bbox_from_shape(ln)
+    # Skip shapes in excluded areas (tables)
+    if not_within_bboxes({'x0': ln_bbox[0], 'top': ln_bbox[1], 'x1': ln_bbox[2], 'bottom': ln_bbox[3]}, exclude_bboxes, tolerance=2):
+      shapes.append(ln_bbox)
   for rc in getattr(page, 'rects', []) or []:
-    shapes.append(_bbox_from_shape(rc))
+    rc_bbox = _bbox_from_shape(rc)
+    if not_within_bboxes({'x0': rc_bbox[0], 'top': rc_bbox[1], 'x1': rc_bbox[2], 'bottom': rc_bbox[3]}, exclude_bboxes, tolerance=2):
+      shapes.append(rc_bbox)
   for cv in getattr(page, 'curves', []) or []:
-    shapes.append(_bbox_from_shape(cv))
+    cv_bbox = _bbox_from_shape(cv)
+    if not_within_bboxes({'x0': cv_bbox[0], 'top': cv_bbox[1], 'x1': cv_bbox[2], 'bottom': cv_bbox[3]}, exclude_bboxes, tolerance=2):
+      shapes.append(cv_bbox)
 
   if not shapes:
     return []
@@ -966,6 +977,7 @@ def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path, chart_config: Opt
               img_path = images_dir / img_filename
               pil_image.save(img_path, 'PNG')
               relative_path = f"images/{img_filename}"
+              markdown_lines.append(f"\n**[CHART {block['chart_index']}]**\n")
               markdown_lines.append(f"<!-- Chart {block['chart_index']}: pos=({bbox[0]:.2f},{bbox[1]:.2f},{bbox[2]:.2f},{bbox[3]:.2f}), score={block.get('score',0):.1f} -->")
               markdown_lines.append(f"![Chart {block['chart_index']} from page {page_num}]({relative_path})")
               markdown_lines.append("")
@@ -979,84 +991,59 @@ def _convert_pdf_to_markdown(input_path: Path, temp_dir: Path, chart_config: Opt
                 'position': bbox,
                 'type': 'chart'
               })
+              print(f"  Extracted chart {block['chart_index']} -> {img_filename}")
             except Exception as e:
               print(f"Error rendering chart region on page {page_num}: {e}")
 
           elif block['type'] == 'table':
             # Add table with position metadata
-
             bbox = block['bbox']
-
+            markdown_lines.append(f"\n**[TABLE {block['table_index']}]**\n")
             markdown_lines.append(f"<!-- Table {block['table_index']}: pos=({bbox[0]:.2f},{bbox[1]:.2f},{bbox[2]:.2f},{bbox[3]:.2f}) -->")
 
             markdown_table = _convert_table_to_markdown(block['content'])
 
             if markdown_table:
-
               markdown_lines.extend(markdown_table)
-
               markdown_lines.append("")
 
           elif block['type'] == 'image':
-
             # Extract and save image
-
             img = block['image_data']
 
             if _skip_watermark_images(img, page):
-
               continue
 
             try:
-
               img_obj = page.within_bbox((img['x0'], img['top'], img['x1'], img['bottom']))
-
               pil_image = img_obj.to_image(resolution=150).original
-
               image_counter += 1
-
               img_filename = f"page_{page_num:03d}_image_{block['image_index']:02d}.png"
-
               img_path = images_dir / img_filename
-
               pil_image.save(img_path, 'PNG')
-
               relative_path = f"images/{img_filename}"
-
+              
               # Add image with position metadata
-
               bbox = block['bbox']
-
+              markdown_lines.append(f"\n**[IMAGE {image_counter}]**\n")
               markdown_lines.append(f"<!-- Image {image_counter}: pos=({bbox[0]:.2f},{bbox[1]:.2f},{bbox[2]:.2f},{bbox[3]:.2f}) -->")
-
               markdown_lines.append(f"![Image {image_counter} from page {page_num}]({relative_path})")
-
               markdown_lines.append("")
 
               # Store image for OCR
-
               extracted_images.append({
-
                 'index': image_counter,
-
                 'image': pil_image,
-
                 'filename': img_filename,
-
                 'path': str(img_path),
-
                 'relative_path': relative_path,
-
                 'page_number': page_num,
-
-                'position': bbox
-
+                'position': bbox,
+                'type': 'image'
               })
-
-              print(f"Extracted image: page {page_num}, image {block['image_index']} -> {img_filename}")
+              print(f"  Extracted image {block['image_index']} -> {img_filename}")
 
             except Exception as e:
-
               print(f"Error extracting image {block['image_index']} from page {page_num}: {e}")
 
         markdown_lines.append("---")
